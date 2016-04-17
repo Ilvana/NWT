@@ -9,14 +9,14 @@
     </appender>
 
     <appender name="errorFileAppender" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="d:/Workspace/NWT/Kino-TimXY/logs/error.log" />
+        <param name="File" value="C:\Users\ilvana\Documents\NWT\Kino-TimXY\logs\error.log" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%d{MM-dd-yyyy HH:mm:ss.SSS}] %-5p [%t] %c at line %L - %m%n" />
         </layout>
     </appender>
 
     <appender name="debugFileAppender" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="d:/Workspace/NWT/Kino-TimXY/logs/debug.log" />
+        <param name="File" value="C:\Users\ilvana\Documents\NWT\Kino-TimXY\logs\debug.log" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%d{MM-dd-yyyy HH:mm:ss.SSS}] %-5p [%t] %c at line %L - %m%n" />
         </layout>
