@@ -2,6 +2,9 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
     function ($scope, $filter, $log, HomeService, $http, $window) {
 
         $scope.movies = [];
+        $scope.movie1 = null;
+        $scope.movie2 = null;
+        $scope.movie3 = null;
         HomeService.getAllMovies().then(function (data) {
             $scope.movies = data;
             $scope.extraData = [];
@@ -17,6 +20,18 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
                             $scope.movies[i].imdb = $scope.details.imdbRating;
                             $scope.movies[i].tomatoes = $scope.details.tomatoRating;
                             $scope.movies[i].poster = $scope.details.Poster;
+
+                            if(i == $scope.movies.length - 1) {
+                                $scope.movies.sort(function(a, b) {
+                                    return parseFloat(b.imdb) - parseFloat(a.imdb);
+                                })
+                                $scope.movie1 = $scope.movies[0];
+                                $scope.movie2 = $scope.movies[1];
+                                $scope.movie3 = $scope.movies[2];
+                                //$log.log($scope.movie1.name);
+                                //$log.log($scope.movie2.name);
+                                //$log.log($scope.movie3.name);
+                            }
                         });
                 })(i);
             }

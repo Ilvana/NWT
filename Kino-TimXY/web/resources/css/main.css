@@ -593,6 +593,7 @@ ul.sub-menu {
 
 .girl {
   margin-left: 0;
+  max-height: 315px;
 }
 
 .item h1 {
