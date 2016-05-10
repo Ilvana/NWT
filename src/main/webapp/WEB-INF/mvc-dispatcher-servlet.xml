@@ -17,6 +17,16 @@
 
     <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+
+    <bean id="messageSource" class="kino.utils.SerializableResourceBundleMessageSource">
+        <property name="basename">
+            <value>classpath:/messages</value>
+        </property>
+    </bean>
+
     <import resource="spring-config.xml"/>
 
     <context:annotation-config/>
@@ -32,15 +42,5 @@
             <property name="paramName" value="lang"/>
         </bean>
     </mvc:interceptors>
-
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="en" />
-    </bean>
-
-    <bean id="messageSource" class="kino.utils.SerializableResourceBundleMessageSource">
-        <property name="basename">
-            <value>classpath:/messages</value>
-        </property>
-    </bean>
 
 </beans>

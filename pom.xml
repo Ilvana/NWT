@@ -7,6 +7,7 @@
     <groupId>Kino-TimXY</groupId>
     <artifactId>Kino</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
