@@ -19,7 +19,7 @@
                                     <h2>{{movie1.director}}</h2>
 
                                     <p>Imdb Rating: {{movie1.imdb}} | Rotten Tomatoes Rating: {{movie1.tomatoes}}</p>
-                                    <button type="button" class="btn btn-default get">Reserve a seat!</button>
+                                    <button type="button" class="btn btn-default get">Get Tickets!</button>
                                 </div>
                                 <div class="col-sm-6">
                                     <img ng-src='{{movie1.poster}}' class="girl img-responsive" alt=""/>
@@ -32,7 +32,7 @@
                                     <h2>{{movie2.director}}</h2>
 
                                     <p>Imdb Rating: {{movie2.imdb}} | Rotten Tomatoes Rating: {{movie2.tomatoes}}</p>
-                                    <button type="button" class="btn btn-default get">Reserve a seat!</button>
+                                    <button type="button" class="btn btn-default get">Get Tickets!</button>
                                 </div>
                                 <div class="col-sm-6">
                                     <img ng-src='{{movie2.poster}}' class="girl img-responsive" alt=""/>
@@ -46,7 +46,7 @@
                                     <h2>{{movie3.director}}</h2>
 
                                     <p>Imdb Rating: {{movie3.imdb}} | Rotten Tomatoes Rating: {{movie3.tomatoes}}</p>
-                                    <button type="button" class="btn btn-default get">Reserve a seat!</button>
+                                    <button type="button" class="btn btn-default get">Get Tickets!</button>
                                 </div>
                                 <div class="col-sm-6">
                                     <img ng-src='{{movie3.poster}}' class="girl img-responsive" alt=""/>
@@ -78,13 +78,9 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="resources/images/home/recommend1.jpg" alt=""/>
-
-                                    <h2>$56</h2>
-
-                                    <p>{{upcomingMovie.name}}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <img ng-src='{{upcomingMovie.poster}}' alt=""/>
+                                    <h4>{{upcomingMovie.name}}</h4>
+                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
                                 </div>
                             </div>
                         </div>
@@ -95,13 +91,9 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="resources/images/home/recommend1.jpg" alt=""/>
-
-                                    <h2>$56</h2>
-
-                                    <p>{{upcoming[i*4].name}}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <img ng-src='{{upcoming[i*4].poster}}' alt=""/>
+                                    <h4>{{upcoming[i*4].name}}</h4>
+                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
                                 </div>
                             </div>
                         </div>
@@ -110,13 +102,9 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="resources/images/home/recommend2.jpg" alt=""/>
-
-                                    <h2>$56</h2>
-
-                                    <p>{{upcoming[i*4 + 1].name}}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <img ng-src='{{upcoming[i*4 + 1].poster}}' alt=""/>
+                                    <h4>{{upcoming[i*4 + 1].name}}</h4>
+                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
                                 </div>
                             </div>
                         </div>
@@ -125,13 +113,9 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="resources/images/home/recommend3.jpg" alt=""/>
-
-                                    <h2>$56</h2>
-
-                                    <p>{{upcoming[i*4 + 2].name}}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <img ng-src='{{upcoming[i*4 + 2].poster}}' alt=""/>
+                                    <h4>{{upcoming[i*4 + 2].name}}</h4>
+                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
                                 </div>
                             </div>
                         </div>
@@ -140,13 +124,9 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="resources/images/home/recommend3.jpg" alt=""/>
-
-                                    <h2>$56</h2>
-
-                                    <p>{{upcoming[i*4 + 3].name}}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <img ng-src='{{upcoming[i*4 + 3].poster}}' alt=""/>
+                                    <h4>{{upcoming[i*4 + 3].name}}</h4>
+                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
                                 </div>
                             </div>
                         </div>

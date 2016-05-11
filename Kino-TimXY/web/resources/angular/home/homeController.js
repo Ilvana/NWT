@@ -54,8 +54,15 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
                             }
                         });
                         if(!isPresent) {
+                            angular.forEach($scope.movies, function(movieForInfo) {
+                                if(movieForInfo.id == screening.movie.id) {
+                                    screening.movie.imdb = movieForInfo.imdb;
+                                    screening.movie.tomatoes = movieForInfo.tomatoes;
+                                    screening.movie.poster = movieForInfo.poster;
+                                }
+                            });
                             $scope.upcoming.push(screening.movie);
-                            $log.log(screening.movie.name);
+                            //$log.log(screening.movie.name);
                         }
                     }
                 });
