@@ -69,12 +69,12 @@
     </section>
 
     <div class="recommended_items"><!--recommended_items-->
-        <h2 class="title text-center">Today's movies</h2>
+        <h2 class="title text-center">Upcoming movies</h2>
 
         <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="item active">
-                    <div class="col-sm-4" ng-repeat="upcomingMovie in upcoming | limitTo:quantity">
+                    <div class="col-sm-4" ng-repeat="upcomingMovie in announcements | limitTo:quantity">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
@@ -87,45 +87,45 @@
                     </div>
                 </div>
                 <div class="item" data-ng-repeat="i in range">
-                    <div class="col-sm-4" ng-show="upcoming[i*4].name != null">
+                    <div class="col-sm-4" ng-show="announcements[i*4].name != null">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img ng-src='{{upcoming[i*4].poster}}' alt=""/>
-                                    <h4>{{upcoming[i*4].name}}</h4>
+                                    <img ng-src='{{announcements[i*4].poster}}' alt=""/>
+                                    <h4>{{announcements[i*4].name}}</h4>
                                     <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4" ng-show="upcoming[i*4 + 1].name != null">
+                    <div class="col-sm-4" ng-show="announcements[i*4 + 1].name != null">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img ng-src='{{upcoming[i*4 + 1].poster}}' alt=""/>
-                                    <h4>{{upcoming[i*4 + 1].name}}</h4>
+                                    <img ng-src='{{announcements[i*4 + 1].poster}}' alt=""/>
+                                    <h4>{{announcements[i*4 + 1].name}}</h4>
                                     <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4" ng-show="upcoming[i*4 + 2].name != null">
+                    <div class="col-sm-4" ng-show="announcements[i*4 + 2].name != null">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img ng-src='{{upcoming[i*4 + 2].poster}}' alt=""/>
-                                    <h4>{{upcoming[i*4 + 2].name}}</h4>
+                                    <img ng-src='{{announcements[i*4 + 2].poster}}' alt=""/>
+                                    <h4>{{announcements[i*4 + 2].name}}</h4>
                                     <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4" ng-show="upcoming[i*4 + 3].name != null">
+                    <div class="col-sm-4" ng-show="announcements[i*4 + 3].name != null">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img ng-src='{{upcoming[i*4 + 3].poster}}' alt=""/>
-                                    <h4>{{upcoming[i*4 + 3].name}}</h4>
+                                    <img ng-src='{{announcements[i*4 + 3].poster}}' alt=""/>
+                                    <h4>{{announcements[i*4 + 3].name}}</h4>
                                     <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
                                 </div>
                             </div>
@@ -139,6 +139,40 @@
             <span class="right recommended-item-control" data-target="#recommended-item-carousel" data-slide="next">
                 <i class="fa fa-angle-right"></i>
             </span>
+        </div>
+    </div>
+
+    <div class="features_items"><!--features_items-->
+        <h2 class="title text-center">Today's Movies</h2>
+
+        <div class="col-sm-4" ng-repeat="todayMovie in todaysMovies">
+            <div class="product-image-wrapper">
+                <div class="single-products">
+                    <div class="productinfo text-center">
+                        <img ng-src='{{todayMovie.poster}}' alt=""/>
+
+                        <h2>$56</h2>
+
+                        <h4>{{todayMovie.name}}</h4>
+                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Buy Ticket</a>
+                    </div>
+                    <div class="product-overlay">
+                        <div class="overlay-content">
+
+                            <p>{{todayMovie.description}}</p>
+                            <h2>$56</h2>
+
+                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Buy Ticket</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="choose">
+                    <ul class="nav nav-pills nav-justified">
+                        <li><a href="#"></i>Imdb: {{todayMovie.imdb}}</a></li>
+                        <li><a href="#"></i>Rotten Tomatoes: {{todayMovie.tomatoes}}</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

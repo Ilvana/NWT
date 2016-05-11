@@ -2,14 +2,17 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
     function ($scope, $filter, $log, HomeService, $http, $window) {
 
         $scope.movies = [];
-        $scope.upcoming = [];
+        $scope.announcements = [];
+        $scope.todaysMovies = [];
         $scope.screenings = [];
         $scope.movie1 = null;
         $scope.movie2 = null;
         $scope.movie3 = null;
         $scope.numberOfExtraSlides = 0;
+        $scope.numberOfMovieRows = 0;
         $scope.Math=Math;
         $scope.range = [];
+        $scope.rowsRange = [];
         $scope.quantity = 4;
         HomeService.getAllMovies().then(function (data) {
             $scope.movies = data;
@@ -33,9 +36,6 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
                                 $scope.movie1 = $scope.movies[0];
                                 $scope.movie2 = $scope.movies[1];
                                 $scope.movie3 = $scope.movies[2];
-
-
-
                             }
                         });
                 })(i);
@@ -43,13 +43,47 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
 
             HomeService.getAllScreenings().then(function(data) {
                 $scope.screenings = data;
+                angular.forEach($scope.movies, function(movieForInfo) {
+                    var isScheduled = false;
+                    angular.forEach($scope.screenings, function(screening){
+                        if(screening.movie.id == movieForInfo.id) {
+                            isScheduled = true;
+                            //$log.log(movieForInfo.name);
+                        }
+                    });
+                    if(!isScheduled) {
+                        var isAdded = false;
+                        angular.forEach($scope.announcements, function(upcomingMovie){
+                            if(upcomingMovie.id == movieForInfo.id) {
+                                isAdded = true;
+                            }
+                        });
+                        if(!isAdded) {
+                            $scope.announcements.push(movieForInfo);
+                            //$log.log(screening.movie.name);
+                        }
+                    }
+                });
+                $scope.numberOfExtraSlides = Math.ceil($scope.announcements.length/4) - 1;
+                //$log.log($scope.numberOfExtraSlides);
+                var range = [];
+                for(var l=1;l<=$scope.numberOfExtraSlides;l++) {
+                    range.push(l);
+                }
+                $scope.range = range;
+                //$log.log($scope.range);
+
+
+
+
+
                 angular.forEach($scope.screenings, function(screening) {
                     var tempDate = new Date();
                     tempDate = $filter('date')(tempDate, "dd-MM-yyyy");
                     if(screening.timeBegin.indexOf(tempDate) > -1 == true) {
                         var isPresent = false;
-                        angular.forEach($scope.upcoming, function(upcomingMovie){
-                            if(upcomingMovie.id == screening.movie.id) {
+                        angular.forEach($scope.todaysMovies, function(todayMovie){
+                            if(todayMovie.id == screening.movie.id) {
                                 isPresent = true;
                             }
                         });
@@ -61,19 +95,19 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
                                     screening.movie.poster = movieForInfo.poster;
                                 }
                             });
-                            $scope.upcoming.push(screening.movie);
-                            //$log.log(screening.movie.name);
+                            $scope.todaysMovies.push(screening.movie);
+                            $log.log(screening.movie.name);
                         }
                     }
                 });
-                $scope.numberOfExtraSlides = Math.ceil($scope.upcoming.length/4) - 1;
-                $log.log($scope.numberOfExtraSlides);
-                var range = [];
-                for(var l=1;l<=$scope.numberOfExtraSlides;l++) {
-                    range.push(l);
+                $scope.numberOfMovieRows = Math.ceil($scope.todaysMovies.length/4);
+                $log.log($scope.numberOfMovieRows);
+                var rowsRange = [];
+                for(var l=1;l<=$scope.numberOfMovieRows;l++) {
+                    rowsRange.push(l);
                 }
-                $scope.range = range;
-                //$log.log($scope.range);
+                $scope.rowsRange = rowsRange;
+                $log.log($scope.rowsRange);
             }, function() {
                     $window.location.replace('/403')}
             );
