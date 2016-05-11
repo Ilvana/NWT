@@ -26,6 +26,32 @@ app.service('HomeService', ['$http', '$q', '$log', function ($http, $q, $log) {
         return deferred.promise;
     };
 
+    this.getAllScreenings = function () {
+
+        var deferred = $q.defer();
+        var that = this;
+
+        var url = '/screening';
+
+        $http.get(url, {
+            headers: {
+                'Content-type': 'Application/json'
+            }
+        }).success(function (data) {
+            var screenings = [];
+
+            screenings = data;
+
+            deferred.resolve(screenings);
+
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
 
     this.createMovie = function() {
         var deferred = $q.defer();

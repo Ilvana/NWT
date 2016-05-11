@@ -55,16 +55,110 @@
 
                         </div>
 
-                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                        <span data-target="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
                             <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                        </span>
+                        <span data-target="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
                             <i class="fa fa-angle-right"></i>
-                        </a>
+                        </span>
                     </div>
 
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="recommended_items"><!--recommended_items-->
+        <h2 class="title text-center">Today's movies</h2>
+
+        <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="col-sm-4" ng-repeat="upcomingMovie in upcoming | limitTo:quantity">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="resources/images/home/recommend1.jpg" alt=""/>
+
+                                    <h2>$56</h2>
+
+                                    <p>{{upcomingMovie.name}}</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" data-ng-repeat="i in range">
+                    <div class="col-sm-4" ng-show="upcoming[i*4].name != null">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="resources/images/home/recommend1.jpg" alt=""/>
+
+                                    <h2>$56</h2>
+
+                                    <p>{{upcoming[i*4].name}}</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" ng-show="upcoming[i*4 + 1].name != null">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="resources/images/home/recommend2.jpg" alt=""/>
+
+                                    <h2>$56</h2>
+
+                                    <p>{{upcoming[i*4 + 1].name}}</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" ng-show="upcoming[i*4 + 2].name != null">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="resources/images/home/recommend3.jpg" alt=""/>
+
+                                    <h2>$56</h2>
+
+                                    <p>{{upcoming[i*4 + 2].name}}</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" ng-show="upcoming[i*4 + 3].name != null">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="resources/images/home/recommend3.jpg" alt=""/>
+
+                                    <h2>$56</h2>
+
+                                    <p>{{upcoming[i*4 + 3].name}}</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="left recommended-item-control" data-target="#recommended-item-carousel" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+            </span>
+            <span class="right recommended-item-control" data-target="#recommended-item-carousel" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+            </span>
+        </div>
+    </div>
 </div>
