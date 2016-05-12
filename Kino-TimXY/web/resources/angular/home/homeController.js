@@ -14,6 +14,7 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
         $scope.range = [];
         $scope.rowsRange = [];
         $scope.quantity = 4;
+        //get all movies, sort them by imdb rating and pick out top three -> FIRST SLIDER
         HomeService.getAllMovies().then(function (data) {
             $scope.movies = data;
 
@@ -42,13 +43,21 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
             }
 
             HomeService.getAllScreenings().then(function(data) {
+                //get all screenings and pick out movies without screenings -> SECOND SLIDER
                 $scope.screenings = data;
                 angular.forEach($scope.movies, function(movieForInfo) {
                     var isScheduled = false;
                     angular.forEach($scope.screenings, function(screening){
                         if(screening.movie.id == movieForInfo.id) {
                             isScheduled = true;
-                            //$log.log(movieForInfo.name);
+                            var newDate =new Date(screening.timeBegin);
+                            var tempDate = $filter('date')(newDate, "HH:mm");
+                            if(movieForInfo.screeningList != null) {
+                                movieForInfo.screeningList = movieForInfo.screeningList + "," + tempDate;
+                            }
+                            else {
+                                movieForInfo.screeningList = tempDate;
+                            }
                         }
                     });
                     if(!isScheduled) {
@@ -60,23 +69,16 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
                         });
                         if(!isAdded) {
                             $scope.announcements.push(movieForInfo);
-                            //$log.log(screening.movie.name);
                         }
                     }
                 });
                 $scope.numberOfExtraSlides = Math.ceil($scope.announcements.length/4) - 1;
-                //$log.log($scope.numberOfExtraSlides);
                 var range = [];
                 for(var l=1;l<=$scope.numberOfExtraSlides;l++) {
                     range.push(l);
                 }
                 $scope.range = range;
-                //$log.log($scope.range);
-
-
-
-
-
+                //iterate through screenings and get movies that have screenings today -> TILE LAYOUT
                 angular.forEach($scope.screenings, function(screening) {
                     var tempDate = new Date();
                     tempDate = $filter('date')(tempDate, "dd-MM-yyyy");
@@ -93,6 +95,7 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
                                     screening.movie.imdb = movieForInfo.imdb;
                                     screening.movie.tomatoes = movieForInfo.tomatoes;
                                     screening.movie.poster = movieForInfo.poster;
+                                    screening.movie.screeningList = movieForInfo.screeningList;
                                 }
                             });
                             $scope.todaysMovies.push(screening.movie);
