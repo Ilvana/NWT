@@ -23,6 +23,10 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider) {
             templateUrl: '/resources/angular/newPassword/newPassword.html',
             controller: 'NewPasswordController'
         })
+        .when('/reserveTicket/:movieId', {
+            templateUrl: '/resources/angular/reserveTicket/reserveTicket.html',
+            controller: 'ReserveTicketController'
+        })
         .when('/registration', {
             templateUrl: '/resources/angular/registration/registration.html',
             controller: 'RegistrationController'
