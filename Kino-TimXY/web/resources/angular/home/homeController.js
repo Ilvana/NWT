@@ -1,6 +1,11 @@
 app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$http", "$window",
     function ($scope, $filter, $log, HomeService, $http, $window) {
 
+        $scope.openNewTab = function (link) {
+            $log.log(link);
+            //$window.open(link);
+        };
+
         $scope.movies = [];
         $scope.announcements = [];
         $scope.todaysMovies = [];
@@ -29,6 +34,8 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
                             $scope.movies[i].imdb = $scope.details.imdbRating;
                             $scope.movies[i].tomatoes = $scope.details.tomatoRating;
                             $scope.movies[i].poster = $scope.details.Poster;
+                            $scope.movies[i].linkToImdb= "http://www.imdb.com/title/" + $scope.details.imdbID + "/";
+                            $scope.movies[i].linkToTomatoes = $scope.details.tomatoURL;
 
                             if(i == $scope.movies.length - 1) {
                                 $scope.movies.sort(function(a, b) {
@@ -96,6 +103,8 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
                                     screening.movie.tomatoes = movieForInfo.tomatoes;
                                     screening.movie.poster = movieForInfo.poster;
                                     screening.movie.screeningList = movieForInfo.screeningList;
+                                    screening.movie.linkToTomatoes = movieForInfo.linkToTomatoes;
+                                    screening.movie.linkToImdb = movieForInfo.linkToImdb;
                                 }
                             });
                             $scope.todaysMovies.push(screening.movie);
