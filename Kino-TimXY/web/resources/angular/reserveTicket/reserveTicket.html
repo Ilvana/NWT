@@ -1,7 +1,18 @@
+<div class="reservation-movie-info">
+    <h2>{{movie.name}}</h2>
+    <h3>Screenings:</h3>
+    <ul>
+        <li ng-repeat="screening in screenings">
+            <p ng-click="changeScreening($index)">{{screening.scrBegin}}-{{screening.scrEnd}}</p>
+        </li>
+    </ul>
+</div>
 <div class="wide-container">
+    <div class="screen-imitation"></div>
+    <h1>Screen</h1>
     <div class="cinema-row" ng-repeat="i in seatsY">
         <div ng-repeat="j in seatsX">
-            <div class="cinema-seat" ng-if="seatsSchedule[$parent.$index*currentTheater.sizeX + $index] == 0">
+            <div class="cinema-seat" ng-init="tab = 1" ng-class="{'cinema-seat-reserved': tab == 2}" ng-click="changeReservation($index,$parent.$parent.$index, tab);tab == 2 ? (tab = 1) : (tab = 2)" ng-if="seatsSchedule[$parent.$index*currentTheater.sizeX + $index] == 0">
                 <p>{{rowSigns[i - 1]}}{{$index + 1}}</p>
             </div>
             <div class="cinema-seat-taken" ng-if="seatsSchedule[$parent.$index*currentTheater.sizeX + $index] == 1">

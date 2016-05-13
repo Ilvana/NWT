@@ -1,5 +1,16 @@
-app.controller("ReserveTicketController", ['$scope', '$routeParams', '$log', '$window', '$http', 'ReserveTicketService', 'HomeService',
-    function ($scope, $routeParams, $log, $window, $http, ReserveTicketService, HomeService) {
+app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', '$log', '$window', '$http', 'ReserveTicketService', 'HomeService',
+    function ($scope, $routeParams, $filter, $log, $window, $http, ReserveTicketService, HomeService) {
+
+
+        $scope.tempRes = "";
+        $scope.changeReservation = function(seatX,seatY,status) {
+            //$log.log(seatX + "," + seatY + "," + status);
+            $scope.tempRes = seatX + "," + seatY + "," + status;
+        };
+
+        $scope.changeScreening = function(screeningId) {
+            getTheaterAndTicketsForScreening($scope.screenings[screeningId]);
+        };
 
         movieId = $routeParams.movieId;
         $scope.movie = null;
@@ -14,6 +25,10 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$log', '$w
         //$log.log($scope.movieId);
 
         function getTheaterAndTicketsForScreening(screening) {
+            $scope.seatsX = [];
+            $scope.seatsY = [];
+            $scope.currentTickets = [];
+            $scope.seatsSchedule = [];
             $scope.currentTheater = screening.theater;
             ReserveTicketService.getAllTickets().then(function(data) {
                 var localTickets = data;
@@ -57,6 +72,14 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$log', '$w
                     }
                 });
                 getTheaterAndTicketsForScreening($scope.screenings[0]);
+                angular.forEach($scope.screenings, function(screening) {
+                    var newDateBegin =new Date(screening.timeBegin);
+                    var newDateEnd =new Date(screening.timeEnd);
+                    var tempDateBegin = $filter('date')(newDateBegin, "HH:mm");
+                    var tempDateEnd = $filter('date')(newDateEnd, "HH:mm");
+                    screening.scrBegin = tempDateBegin;
+                    screening.scrEnd = tempDateEnd;
+                })
 
                 }, function() {
                     $window.location.replace('/403')}

@@ -952,25 +952,54 @@ h2.title {
 }
 
 .wide-container {
+  padding-top: 5px;
   max-width: 60%;
-  border: double #2a6496;
   margin: 0 auto;
+}
+
+.screen-imitation{
+  margin: 0 auto;
+  width:60%;
+  height: 8px;
+  background-color: #fdb45e;
+  border-radius: 3px;
+}
+
+.wide-container h1 {
+  text-align: center;
 }
 
 .cinema-row {
   margin: 0 auto;
   width:100%;
-  background-color: #2a6496;
 }
 .cinema-seat {
   background-color: #ece4e5;
   border: double #080808;
   display: block;
   float: left;
-  width: 5%;
+  width: 4.5%;
+  margin: 1px;
+  border-radius: 5px;
 }
 
 .cinema-seat p {
+  padding-top: 6px;
+  text-align: center;
+}
+
+.cinema-seat-reserved {
+  background-color: #fdb45e;
+  border: double #080808;
+  display: block;
+  float: left;
+  width: 4.5%;
+  margin: 1px;
+  border-radius: 5px;
+}
+
+.cinema-seat-reserved p {
+  padding-top: 6px;
   text-align: center;
 }
 
@@ -979,11 +1008,21 @@ h2.title {
   border: double #080808;
   display: block;
   float: left;
-  width: 5%;
+  width: 4.5%;
+  margin: 1px;
+  border-radius: 5px;
 }
 
 .cinema-seat-taken p {
   text-align: center;
+  padding-top: 6px;
+}
+
+.reservation-movie-info {
+  width: 20%;
+  height: 100px;
+  float: left;
+  padding-left: 5px;
 }
 
 .add-to-cart {
