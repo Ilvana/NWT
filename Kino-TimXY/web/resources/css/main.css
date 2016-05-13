@@ -945,7 +945,46 @@ h2.title {
   color: #fff;
 }
 
+.cinema-row:after{
+  content:'';
+  display:block;
+  clear: both;
+}
 
+.wide-container {
+  max-width: 60%;
+  border: double #2a6496;
+  margin: 0 auto;
+}
+
+.cinema-row {
+  margin: 0 auto;
+  width:100%;
+  background-color: #2a6496;
+}
+.cinema-seat {
+  background-color: #ece4e5;
+  border: double #080808;
+  display: block;
+  float: left;
+  width: 5%;
+}
+
+.cinema-seat p {
+  text-align: center;
+}
+
+.cinema-seat-taken {
+  background-color: #a94442;
+  border: double #080808;
+  display: block;
+  float: left;
+  width: 5%;
+}
+
+.cinema-seat-taken p {
+  text-align: center;
+}
 
 .add-to-cart {
   background:#F5F5ED;
