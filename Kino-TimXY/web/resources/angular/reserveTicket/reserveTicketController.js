@@ -4,8 +4,21 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
 
         $scope.tempRes = "";
         $scope.changeReservation = function(seatX,seatY,status) {
-            //$log.log(seatX + "," + seatY + "," + status);
-            $scope.tempRes = seatX + "," + seatY + "," + status;
+            if(status == 1) {
+                $scope.currentReservations.push({
+                    positionX: seatX + 1,
+                    positionY: seatY + 1
+                });
+            }
+            else {
+                var tempArray = [];
+                angular.forEach($scope.currentReservations, function(currentRes) {
+                    if(!(currentRes.positionX == seatX + 1 && currentRes.positionY == seatY + 1)) {
+                        tempArray.push(currentRes);
+                    }
+                });
+                $scope.currentReservations = tempArray;
+            }
         };
 
         $scope.changeScreening = function(screeningId) {
@@ -18,11 +31,12 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
         $scope.currentTheater = null;
         $scope.currentTickets = [];
         $scope.seatsSchedule = [];
+        $scope.currentScreening = null;
+        $scope.currentReservations = [];
         $scope.seatsX = [];
         $scope.seatsY = [];
 
         $scope.rowSigns = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W", "X", "Y", "Z"];
-        //$log.log($scope.movieId);
 
         function getTheaterAndTicketsForScreening(screening) {
             $scope.seatsX = [];
@@ -30,6 +44,7 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
             $scope.currentTickets = [];
             $scope.seatsSchedule = [];
             $scope.currentTheater = screening.theater;
+            $scope.currentScreening = screening;
             ReserveTicketService.getAllTickets().then(function(data) {
                 var localTickets = data;
                 angular.forEach(localTickets, function(ticket) {

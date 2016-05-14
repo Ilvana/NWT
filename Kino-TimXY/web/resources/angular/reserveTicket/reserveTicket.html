@@ -2,8 +2,19 @@
     <h2>{{movie.name}}</h2>
     <h3>Screenings:</h3>
     <ul>
-        <li ng-repeat="screening in screenings">
-            <p ng-click="changeScreening($index)">{{screening.scrBegin}}-{{screening.scrEnd}}</p>
+        <li class="screening-item-reservation" ng-repeat="screening in screenings">
+            <a href="" ng-click="changeScreening($index)">{{screening.scrBegin}}-{{screening.scrEnd}}</a>
+        </li>
+    </ul>
+</div>
+<div class="reservation-ticket-info">
+    <a class="btn btn-default confirm-tickets">Confirm reservation <i class="fa fa-shopping-cart"></i></a>
+    <h2>Reservation info:</h2>
+    <h3>Screening: {{currentScreening.scrBegin}}-{{currentScreening.scrEnd}}</h3>
+    <h3>Seats:</h3>
+    <ul>
+        <li class="ticket-item-reservation" ng-repeat="reservation in currentReservations">
+            <p>{{rowSigns[reservation.positionY - 1]}}{{reservation.positionX}}</p>
         </li>
     </ul>
 </div>
