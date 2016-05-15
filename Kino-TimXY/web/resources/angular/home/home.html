@@ -1,18 +1,178 @@
-<h2>AngularJS up sddfkhsdfjhfdand running.</h2>
-<h2 translate>registration.title.label</h2>
 <div class="generic-container">
-    <table>
-        <tbody>
-            <tr ng-repeat="mov in movies">
-                <td>{{mov.name}}</td>
-                <td>{{mov.description}}</td>
-                <td>{{mov.duration}}</td>
-                <td>{{mov.director}}</td>
-                <td>{{mov.genre}}</td>
-                <td>{{mov.imdb}}</td>
-                <td>{{mov.tomatoes}}</td>
-                <td><img ng-src='{{mov.poster}}'></td>
-            </tr>
-        </tbody>
-    </table>
+
+    <section id="slider"><!--slider-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#slider-carousel" data-slide-to="1"></li>
+                            <li data-target="#slider-carousel" data-slide-to="2"></li>
+                        </ol>
+
+                        <div class="carousel-inner">
+                            <div class="item active" ng-model="movie1">
+                                <div class="col-sm-6">
+                                    <h1>{{movie1.name}}</h1>
+
+                                    <h2>{{movie1.director}}</h2>
+
+                                    <p>Imdb Rating: {{movie1.imdb}} | Rotten Tomatoes Rating: {{movie1.tomatoes}}</p>
+                                    <button type="button" class="btn btn-default get">Get Tickets!</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img ng-src='{{movie1.poster}}' class="girl img-responsive" alt=""/>
+                                </div>
+                            </div>
+                            <div class="item" ng-model="movie2">
+                                <div class="col-sm-6">
+                                    <h1>{{movie2.name}}</h1>
+
+                                    <h2>{{movie2.director}}</h2>
+
+                                    <p>Imdb Rating: {{movie2.imdb}} | Rotten Tomatoes Rating: {{movie2.tomatoes}}</p>
+                                    <button type="button" class="btn btn-default get">Get Tickets!</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img ng-src='{{movie2.poster}}' class="girl img-responsive" alt=""/>
+                                </div>
+                            </div>
+
+                            <div class="item" ng-model="movie3">
+                                <div class="col-sm-6">
+                                    <h1>{{movie3.name}}</h1>
+
+                                    <h2>{{movie3.director}}</h2>
+
+                                    <p>Imdb Rating: {{movie3.imdb}} | Rotten Tomatoes Rating: {{movie3.tomatoes}}</p>
+                                    <button type="button" class="btn btn-default get">Get Tickets!</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img ng-src='{{movie3.poster}}' class="girl img-responsive" alt=""/>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span data-target="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </span>
+                        <span data-target="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="recommended_items"><!--recommended_items-->
+        <h2 class="title text-center">Upcoming movies</h2>
+
+        <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="col-sm-4" ng-repeat="upcomingMovie in announcements | limitTo:quantity">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img ng-src='{{upcomingMovie.poster}}' alt=""/>
+                                    <h4>{{upcomingMovie.name}}</h4>
+                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" data-ng-repeat="i in range">
+                    <div class="col-sm-4" ng-show="announcements[i*4].name != null">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img ng-src='{{announcements[i*4].poster}}' alt=""/>
+                                    <h4>{{announcements[i*4].name}}</h4>
+                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" ng-show="announcements[i*4 + 1].name != null">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img ng-src='{{announcements[i*4 + 1].poster}}' alt=""/>
+                                    <h4>{{announcements[i*4 + 1].name}}</h4>
+                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" ng-show="announcements[i*4 + 2].name != null">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img ng-src='{{announcements[i*4 + 2].poster}}' alt=""/>
+                                    <h4>{{announcements[i*4 + 2].name}}</h4>
+                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" ng-show="announcements[i*4 + 3].name != null">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img ng-src='{{announcements[i*4 + 3].poster}}' alt=""/>
+                                    <h4>{{announcements[i*4 + 3].name}}</h4>
+                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="left recommended-item-control" data-target="#recommended-item-carousel" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+            </span>
+            <span class="right recommended-item-control" data-target="#recommended-item-carousel" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="features_items"><!--features_items-->
+        <h2 class="title text-center">Today's Movies</h2>
+
+        <div class="col-sm-4" ng-repeat="todayMovie in todaysMovies">
+            <div class="product-image-wrapper">
+                <div class="single-products">
+                    <div class="productinfo text-center">
+                        <img ng-src='{{todayMovie.poster}}' alt=""/>
+
+                        <h2>$56</h2>
+
+                        <h4>{{todayMovie.name}}</h4>
+                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Buy Ticket</a>
+                    </div>
+                    <div class="product-overlay">
+                        <div class="overlay-content">
+
+                            <p>{{todayMovie.description}}</p>
+                            <h2>{{todayMovie.screeningList}}</h2>
+
+                            <a href="#/reserveTicket/{{todayMovie.id}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Buy Ticket</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="choose">
+                    <ul class="nav nav-pills nav-justified">
+                        <li><a href="{{todayMovie.linkToImdb}}"></i>Imdb: {{todayMovie.imdb}}</a></li>
+                        <li><a href="{{todayMovie.linkToTomatoes}}"></i>Rotten Tomatoes: {{todayMovie.tomatoes}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
