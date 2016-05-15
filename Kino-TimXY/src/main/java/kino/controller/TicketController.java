@@ -26,7 +26,7 @@ public class TicketController {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ResponseEntity handleRequestBodyException(Exception  exception) {
-        logger.error("Error ocurred: ", exception);
+        logger.error("Error occurred: ", exception);
         return new ResponseEntity(
                 ErrorGenerator.generateError(String.format("Error ocurred: %s", exception.getMessage())), HttpStatus.BAD_REQUEST
         );
