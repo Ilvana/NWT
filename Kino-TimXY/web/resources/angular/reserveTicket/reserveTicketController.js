@@ -88,8 +88,14 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
                 });
                 getTheaterAndTicketsForScreening($scope.screenings[0]);
                 angular.forEach($scope.screenings, function(screening) {
-                    var newDateBegin =new Date(screening.timeBegin);
-                    var newDateEnd =new Date(screening.timeEnd);
+                    var dateStr = screening.timeBegin.split(' ')[0].split('-');
+                    var timeStr = screening.timeBegin.split(' ')[1].split(':');
+                    var newDateBegin =new Date(dateStr[2], parseInt(dateStr[1])-1, dateStr[0], timeStr[0], timeStr[1], timeStr[2]);
+
+                    dateStr = screening.timeEnd.split(' ')[0].split('-');
+                    var timeStr = screening.timeEnd.split(' ')[1].split(':');
+                    var newDateEnd =new Date(dateStr[2], parseInt(dateStr[1])-1, dateStr[0], timeStr[0], timeStr[1], timeStr[2]);
+
                     var tempDateBegin = $filter('date')(newDateBegin, "HH:mm");
                     var tempDateEnd = $filter('date')(newDateEnd, "HH:mm");
                     screening.scrBegin = tempDateBegin;
