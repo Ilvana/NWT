@@ -34,6 +34,9 @@
     <script src="resources/angular/home/homeService.js" type="text/javascript"></script>
     <script src="resources/angular/home/homeController.js" type="text/javascript"></script>
 
+    <script src="resources/angular/announcements/announcementsService.js" type="text/javascript"></script>
+    <script src="resources/angular/announcements/announcementsController.js" type="text/javascript"></script>
+
     <script src="resources/angular/contact/contactService.js" type="text/javascript"></script>
     <script src="resources/angular/contact/contactController.js" type="text/javascript"></script>
 
