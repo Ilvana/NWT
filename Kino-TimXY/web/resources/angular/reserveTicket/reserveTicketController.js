@@ -44,6 +44,7 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
             $scope.currentTickets = [];
             $scope.seatsSchedule = [];
             $scope.currentTheater = screening.theater;
+            $scope.currentReservations = [];
             $scope.currentScreening = screening;
             ReserveTicketService.getAllTickets().then(function(data) {
                 var localTickets = data;

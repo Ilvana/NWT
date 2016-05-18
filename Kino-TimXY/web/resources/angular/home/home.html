@@ -19,7 +19,7 @@
                                     <h2>{{movie1.director}}</h2>
 
                                     <p>Imdb Rating: {{movie1.imdb}} | Rotten Tomatoes Rating: {{movie1.tomatoes}}</p>
-                                    <button type="button" class="btn btn-default get">Get Tickets!</button>
+                                    <button type="button" class="btn btn-default get" translate>home.topslider.gettickets</button>
                                 </div>
                                 <div class="col-sm-6">
                                     <img ng-src='{{movie1.poster}}' class="girl img-responsive" alt=""/>
@@ -32,7 +32,7 @@
                                     <h2>{{movie2.director}}</h2>
 
                                     <p>Imdb Rating: {{movie2.imdb}} | Rotten Tomatoes Rating: {{movie2.tomatoes}}</p>
-                                    <button type="button" class="btn btn-default get">Get Tickets!</button>
+                                    <button type="button" class="btn btn-default get" translate>home.topslider.gettickets</button>
                                 </div>
                                 <div class="col-sm-6">
                                     <img ng-src='{{movie2.poster}}' class="girl img-responsive" alt=""/>
@@ -46,7 +46,7 @@
                                     <h2>{{movie3.director}}</h2>
 
                                     <p>Imdb Rating: {{movie3.imdb}} | Rotten Tomatoes Rating: {{movie3.tomatoes}}</p>
-                                    <button type="button" class="btn btn-default get">Get Tickets!</button>
+                                    <button type="button" class="btn btn-default get" translate>home.topslider.gettickets</button>
                                 </div>
                                 <div class="col-sm-6">
                                     <img ng-src='{{movie3.poster}}' class="girl img-responsive" alt=""/>
@@ -80,7 +80,7 @@
                                 <div class="productinfo text-center">
                                     <img ng-src='{{upcomingMovie.poster}}' alt=""/>
                                     <h4>{{upcomingMovie.name}}</h4>
-                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
+                                    <a href="#" class="btn btn-default add-to-cart" translate>home.upcomingslider.moreinfo</a>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                                 <div class="productinfo text-center">
                                     <img ng-src='{{announcements[i*4].poster}}' alt=""/>
                                     <h4>{{announcements[i*4].name}}</h4>
-                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
+                                    <a href="#" class="btn btn-default add-to-cart" translate>home.upcomingslider.moreinfo</a>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                 <div class="productinfo text-center">
                                     <img ng-src='{{announcements[i*4 + 1].poster}}' alt=""/>
                                     <h4>{{announcements[i*4 + 1].name}}</h4>
-                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
+                                    <a href="#" class="btn btn-default add-to-cart" translate>home.upcomingslider.moreinfo</a>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                                 <div class="productinfo text-center">
                                     <img ng-src='{{announcements[i*4 + 2].poster}}' alt=""/>
                                     <h4>{{announcements[i*4 + 2].name}}</h4>
-                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
+                                    <a href="#" class="btn btn-default add-to-cart" translate>home.upcomingslider.moreinfo</a>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                                 <div class="productinfo text-center">
                                     <img ng-src='{{announcements[i*4 + 3].poster}}' alt=""/>
                                     <h4>{{announcements[i*4 + 3].name}}</h4>
-                                    <a href="#" class="btn btn-default add-to-cart"></i>More Info</a>
+                                    <a href="#" class="btn btn-default add-to-cart" translate>home.upcomingslider.moreinfo</a>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                         <h2>$56</h2>
 
                         <h4>{{todayMovie.name}}</h4>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Buy Ticket</a>
+                        <a href="#" class="btn btn-default add-to-cart" translate><i class="fa fa-shopping-cart"></i>home.todaymovie.buyticket</a>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
@@ -162,7 +162,7 @@
                             <p>{{todayMovie.description}}</p>
                             <h2>{{todayMovie.screeningList}}</h2>
 
-                            <a href="#/reserveTicket/{{todayMovie.id}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Buy Ticket</a>
+                            <a href="#/reserveTicket/{{todayMovie.id}}" class="btn btn-default add-to-cart" translate><i class="fa fa-shopping-cart"></i>home.todaymovie.buyticket</a>
                         </div>
                     </div>
                 </div>
