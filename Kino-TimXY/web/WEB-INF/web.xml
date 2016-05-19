@@ -9,6 +9,9 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>kino.configuration.DatabaseMigrate</listener-class>
+    </listener>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
