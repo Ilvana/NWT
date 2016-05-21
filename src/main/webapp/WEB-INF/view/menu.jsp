@@ -39,14 +39,17 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <li><a href="/#/contact"><i class="fa fa-user"></i><span translate>menu.contact.title.label</span></a></li>
-                            <sec:authorize access="!hasRole('ROLE_USER')">
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <li><a href="/#/admin"><i class="fa fa-lock"></i><span translate>menu.admin.title.label</span></a></li>
+                            </sec:authorize>
+                            <sec:authorize access="!hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
                                 <li><a href="/#/login"><i class="fa fa-lock"></i><span translate>menu.login.title.label</span></a></li>
                             </sec:authorize>
-                            <sec:authorize access="hasRole('ROLE_USER')">
+                            <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
                                 <li><a href="#" onclick="document.getElementById('logoutForm').submit();"
                                        role="button"><i class="fa fa-lock"></i>Logout</a></li>
                             </sec:authorize>
-                            <sec:authorize access="!hasRole('ROLE_USER')">
+                            <sec:authorize access="!hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
                                 <li><a href="/#/registration"><i class="fa fa-plus-circle"></i> <span translate>menu.registration.title.label</span></a></li>
                             </sec:authorize>
                         </ul>
