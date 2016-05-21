@@ -1,0 +1,71 @@
+<div id="main" class="container" role="main">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="contact-form">
+                <h2 class="title text-center" translate>contact.title.label</h2>
+
+                <div class="status alert alert-success" style="display: none"></div>
+                <form id="main-contact-form" class="contact-form row" name="contact-form" method="post">
+
+                    <div id="nameWrapper" class="form-group col-md-6">
+                        <input type="text" id="clientName" name="clientName" class="form-control" placeholder="{{ 'contact.name.placeholder' | translate }}" ng-blur="validateClientName()">
+                    </div>
+
+                    <div id="emailWrapper" class="form-group col-md-6">
+                        <input id="email" class="form-control" name = 'email' type="text" placeholder="{{ 'contact.email.placeholder' | translate }}" ng-blur="validateEmail()"/>
+                    </div>
+
+                    <div class="form-group col-md-12" id="subjectWrapper">
+                        <input type="text" id="subject" name="subject" class="form-control" placeholder="{{ 'contact.subject.placeholder' | translate }}" ng-blur="validateSubject()">
+                    </div>
+
+                    <div class="form-group col-md-12" id="messageWrapper">
+                        <textarea name="message" id="message" class="form-control" rows="8"
+                                  placeholder="{{ 'contact.message.placeholder' | translate }}" ng-blur="validateMessage()"></textarea>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary pull-right" ng-click="contactUs()" translate>contact.button.text</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="contact-info">
+                <h2 class="title text-center" translate>contact.info.label</h2>
+                <address>
+                    <p>Cinema NWT</p>
+
+                    <p>Aleja lipa, 71000 Sarajevo</p>
+
+                    <p>Sarajevo, BiH</p>
+
+                    <p translate>contact.mobile.label</p>
+
+                    <p>Fax: 1-714-252-0026</p>
+
+                    <p>no-reply@cinema-nwt.com</p>
+                </address>
+                <div class="social-networks">
+                    <h2 class="title text-center" translate>contact.socialNetwork.label</h2>
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/#contact-page-->
+</div>
