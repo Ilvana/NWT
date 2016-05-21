@@ -37,7 +37,7 @@ public class UserViewModel {
         username = user.getUsername();
         password = user.getPassword();
         role = user.getRole();
-        enabled = user.getEnable();
+        enabled = user.isEnabled();
     }
 
     public Integer getId() {

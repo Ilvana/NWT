@@ -36,8 +36,8 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider) {
             controller: 'ReserveTicketController'
         })
         .when('/registration', {
-            templateUrl: '/resources/angular/admin/admin.html',
-            controller: 'AdminController'
+            templateUrl: '/resources/angular/registration/registration.html',
+            controller: 'RegistrationController'
         })
         .when('/admin', {
             templateUrl: '/resources/angular/admin/admin.html',
