@@ -1,1 +1,0 @@
-INSERT INTO event (description, name, timeBegin, timeEnd) VALUES ("Beautiful jazz music.", "Jazzer", NULL, NULL);

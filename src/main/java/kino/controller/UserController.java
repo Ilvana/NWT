@@ -1,6 +1,5 @@
 package kino.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import kino.configuration.BeanConfiguration;
 import kino.model.ReCaptcha;
 import kino.model.UserResponseWrapper;
@@ -29,6 +28,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -140,7 +140,7 @@ public class UserController {
     }
 
     @RequestMapping( method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity add(@RequestBody UserResponseWrapper userResponseWrapper) {
+    public ResponseEntity add(@RequestBody UserResponseWrapper userResponseWrapper, HttpServletRequest request) {
 
         User user = userResponseWrapper.user();
 
@@ -149,15 +149,19 @@ public class UserController {
             return new ResponseEntity(ErrorGenerator.generateError("User creation failed. Invalid user params."), HttpStatus.BAD_REQUEST);
         }
 
-        ReCaptcha reCaptcha;
-        try {
-            reCaptcha = ReCaptchaHttpRequest.post(userResponseWrapper.getRecaptcha());
-        } catch (IOException e) {
-            logger.error("ReCaptcha failed.", e);
-            return new ResponseEntity(ErrorGenerator.generateError("ReCaptcha failed."), HttpStatus.FORBIDDEN);
-        }
-        if(reCaptcha.failed()) {
-            return new ResponseEntity(ErrorGenerator.generateError("ReCaptcha failed. You might be a robot."), HttpStatus.FORBIDDEN);
+        if(!request.isUserInRole("ROLE_ADMIN")) {
+
+            ReCaptcha reCaptcha;
+            try {
+                reCaptcha = ReCaptchaHttpRequest.post(userResponseWrapper.getRecaptcha());
+            } catch (IOException e) {
+                logger.error("ReCaptcha failed.", e);
+                return new ResponseEntity(ErrorGenerator.generateError("ReCaptcha failed."), HttpStatus.FORBIDDEN);
+            }
+            if (reCaptcha.failed()) {
+                return new ResponseEntity(ErrorGenerator.generateError("ReCaptcha failed. You might be a robot."), HttpStatus.FORBIDDEN);
+            }
+
         }
 
         try {
@@ -251,10 +255,12 @@ public class UserController {
             user.setAddress(newUser.getAddress());
             user.setEmail(newUser.getEmail());
             user.setNumber(newUser.getNumber());
-            user.setEnable(newUser.getEnable());
+            user.setEnable(newUser.isEnabled());
             user.setAdmin(newUser.isAdmin());
+            user.setRole(newUser.getRole());
             user.setUsername(newUser.getUsername());
-            user.setPassword(newUser.getPassword());
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            user.setPassword(passwordEncoder.encode(newUser.getPassword()));
 
             modelFactory.UserRepository().save(user);
             logger.info(String.format("User with ID: %d successfully updated.", user.getId()));

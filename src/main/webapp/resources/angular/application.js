@@ -38,6 +38,10 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider) {
         .when('/registration', {
             templateUrl: '/resources/angular/registration/registration.html',
             controller: 'RegistrationController'
+        })
+        .when('/admin', {
+            templateUrl: '/resources/angular/admin/admin.html',
+            controller: 'AdminController'
         });
 
     $httpProvider.defaults.headers.common = {Accept: "application/json"};

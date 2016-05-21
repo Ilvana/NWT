@@ -130,12 +130,12 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public boolean getEnable() {
+    public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnable(boolean enable) {
-        this.enabled = enable;
+    public void setEnable(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

@@ -51,6 +51,9 @@
     <script src="resources/angular/newPassword/newPasswordController.js" type="text/javascript"></script>
 
 
+    <script src="resources/angular/admin/adminController.js" type="text/javascript"></script>
+    <script src="resources/angular/admin/adminService.js" type="text/javascript"></script>
+
     <!-- reCAPTCHA -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
