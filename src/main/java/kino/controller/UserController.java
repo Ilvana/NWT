@@ -117,6 +117,10 @@ public class UserController {
 
 
     }
+    @RequestMapping("/logged")
+    public HttpStatus isLoggedIn(HttpServletRequest request) {
+        return (request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_USER")) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+    }
     @RequestMapping(value = "/newPassword/{token}", method = RequestMethod.POST)
     public ResponseEntity createNewPassword(@PathVariable("token") String token, @RequestBody String password) {
         List<ResetToken> resetTokens = ModelFactory

@@ -1,5 +1,6 @@
 package kino.controller;
 
+import kino.model.entities.User;
 import kino.model.validation.TicketValidator;
 import kino.utils.ErrorGenerator;
 import kino.utils.JsonMessageGenerator;
@@ -11,6 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -89,6 +93,15 @@ public class TicketController {
             logger.error("Ticket create failed. Invalid ticket parameters.");
             return new ResponseEntity(ErrorGenerator.generateError("Ticket create failed. Invalid ticket parameters."), HttpStatus.BAD_REQUEST);
         }
+
+        if(ticket.getUser() ==  null) {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (!(auth instanceof AnonymousAuthenticationToken)) {
+                ticket.setUser((User) auth.getPrincipal());
+                logger.info(String.format("User details retrieved successfully from Security context: %s", ticket.getUser()));
+            }
+        }
+
         try {
             modelFactory.TicketRepository().saveAndFlush(ticket);
 
