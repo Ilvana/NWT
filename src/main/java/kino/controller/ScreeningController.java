@@ -1,6 +1,7 @@
 package kino.controller;
 
 import kino.model.ModelFactory;
+import kino.model.ScreeningsPerDay;
 import kino.model.entities.Screening;
 import kino.model.presentation.ScreeningViewModel;
 import kino.utils.ErrorGenerator;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 import org.slf4j.Logger;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -76,6 +80,42 @@ public class ScreeningController {
             );
         } catch (Exception e) {
             logger.error("Something unusual happened. Please try again later.", e);
+            return new ResponseEntity(
+                    ErrorGenerator.generateError("Something unusual happened. Please try again later."), HttpStatus.NOT_FOUND
+            );
+        }
+    }
+    @RequestMapping(value = "/daily", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getScreeningsPerDay() {
+        try {
+            List<ScreeningsPerDay> screeningsPerDays = new ArrayList<>(7);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(sdf.parse(sdf.format(new Date())));
+
+            Calendar calendar = Calendar.getInstance();
+
+            for(int i=1; i <= 7; i++) {
+
+                Date dateBegin = c.getTime();
+                calendar.setTime(dateBegin);
+                calendar.add(Calendar.DATE, 1);
+                Date dateEnd = calendar.getTime();
+                Integer numberOfScreenings = modelFactory.ScreeningRepository().getScreeningsNumberPerDay(dateBegin, dateEnd);
+
+                ScreeningsPerDay screeningsPerDay = new ScreeningsPerDay(dateBegin, numberOfScreenings);
+
+                screeningsPerDays.add(screeningsPerDay);
+
+                c.add(Calendar.DATE, 1);
+            }
+
+            return new ResponseEntity(screeningsPerDays, HttpStatus.OK);
+
+        } catch (Exception e) {
+            logger.error("Failed to fetch screenings per day.", e);
             return new ResponseEntity(
                     ErrorGenerator.generateError("Something unusual happened. Please try again later."), HttpStatus.NOT_FOUND
             );

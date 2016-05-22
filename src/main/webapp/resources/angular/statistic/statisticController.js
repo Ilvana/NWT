@@ -1,20 +1,31 @@
-app.controller("StatisticController", ['$scope', '$log', 'StatisticService', '$window', '$timeout',
-    function ($scope, $log, StatisticService, $window, $timeout) {
-        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-        $scope.series = ['Series A', 'Series B'];
-        $scope.data = [
-        [65, 59, 80, 81, 56, 55, 40],
-        [28, 48, 40, 19, 86, 27, 90]
-        ];
+app.controller("StatisticController", ['$scope', '$log', 'StatisticService', '$window', '$interval',
+    function ($scope, $log, StatisticService, $window, $interval) {
+        $scope.series = ['Screenings per day'];
+        $scope.data = [];
         $scope.onClick = function (points, evt) {
         console.log(points, evt);
         };
+        $scope.days = [];
+        $scope.dailyNumber = [];
+        StatisticService.getScreenings().then(function(data) {
+            data.forEach(function(item){
+                $scope.days.push(item.date.split(' ')[0]);
+                $scope.dailyNumber.push(item.numberOfScreenings);
+            });
+            $scope.labels = $scope.days;
+            $scope.data[0] = $scope.dailyNumber;
+        });
 
-        // Simulate async data update
-        $timeout(function () {
-        $scope.data = [
-          [28, 48, 40, 19, 86, 27, 90],
-          [65, 59, 80, 81, 56, 55, 40]
-        ];
+        $interval(function () {
+            $scope.days = [];
+            $scope.dailyNumber = [];
+            StatisticService.getScreenings().then(function(data) {
+                data.forEach(function(item){
+                    $scope.days.push(item.date.split(' ')[0]);
+                    $scope.dailyNumber.push(item.numberOfScreenings);
+                });
+                $scope.labels = $scope.days;
+                $scope.data[0] = $scope.dailyNumber;
+            });
         }, 3000);
 }]);

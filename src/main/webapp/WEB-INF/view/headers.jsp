@@ -59,7 +59,6 @@
     <script src="resources/angular/admin/adminController.js" type="text/javascript"></script>
     <script src="resources/angular/admin/adminService.js" type="text/javascript"></script>
 
-    <script src="resources/angular/statistic/statistic.js" type="text/javascript"></script>
     <script src="resources/angular/statistic/statisticController.js" type="text/javascript"></script>
     <script src="resources/angular/statistic/statisticService.js" type="text/javascript"></script>
 
