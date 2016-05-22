@@ -82,12 +82,7 @@
                             <li><a href="/#/special_offers" translate>menu.specialOffers.title.label</a></li>
                             <li><a href="/#/about_us" translate>menu.aboutUs.title.label</a></li>
                             <li><a href="/#/contact" translate>menu.contact.title.label</a></li>
-                            <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="blog.html">Blog List</a></li>
-                                    <li><a href="blog-single.html">Blog Single</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="/#/blog" translate>menu.blog.title.label</a></li>
                         </ul>
                     </div>
                 </div>

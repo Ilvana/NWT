@@ -11,6 +11,10 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider, ChartJsP
             templateUrl: '/resources/angular/contact/contact.html',
             controller: 'ContactController'
         })
+        .when('/blog', {
+            templateUrl: '/resources/angular/blog/blog.html',
+            controller: 'BlogController'
+        })
         .when('/announcements', {
             templateUrl: '/resources/angular/announcements/announcements.html',
             controller: 'AnnouncementsController'
