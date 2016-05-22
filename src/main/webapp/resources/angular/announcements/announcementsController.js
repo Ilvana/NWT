@@ -1,5 +1,5 @@
 app.controller("AnnouncementsController", ['$scope','$filter', '$log', "AnnouncementsService","$http", "$window",
-    function ($scope, $filter, $log, AnnouncementsService, $http, $window) {
+    function ($scope, $filter, $log, AnnouncementsService) {
 
         $scope.announcementTemplate = 'announcements';
         $scope.events = [];

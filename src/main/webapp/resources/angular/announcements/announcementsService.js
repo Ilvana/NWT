@@ -1,4 +1,4 @@
-app.service('AnnouncementsService', ['$http', '$q', '$log','$window', function ($http, $q, $log,$window) {
+app.service('AnnouncementsService', ['$http', '$q', '$log','$window', function ($http, $q, $log) {
 
     this.getAllEvents = function () {
 
