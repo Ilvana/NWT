@@ -92,4 +92,82 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             $scope.user.enabled = false;
         }
 
+
+
+
+        $scope.movies = [];
+
+        $scope.movie = {
+            'id': null,
+            'name': '',
+            'duration': '',
+            'description': '',
+            'director': '',
+            'genre': '',
+        };
+
+        AdminService.getMovies().then(function(data) {
+            $scope.movies = data;
+        });
+
+        $scope.deleteMovie = function(movie) {
+            var index = $scope.movies.indexOf(movie);
+            if (index == -1) {
+                return;
+            }
+            AdminService.deleteMovie(movie).then(function () {
+                $scope.movies.splice(index, 1);
+            }, function() { $window.location.href='/404' });
+        };
+
+        $scope.editMovie = function(movie) {
+            $scope.submitModal = 'Update';
+            $scope.modalHeader = 'Update movie';
+            $scope.create = false;
+            $scope.movie = angular.copy(movie);
+            $(angular.element(movieModal)).modal('show');
+        }
+
+        $scope.cleanMovieDialog = function() {
+            $scope.resetMovie();
+            $(angular.element(movieModal)).modal("hide");
+            // Clean input
+
+            // Set current movie to default
+        }
+
+        $scope.createMovie = function() {
+            $scope.submitModal = 'Create';
+            $scope.modalHeader = 'Create new movie';
+            $scope.create = true;
+            $(angular.element(movieModal)).modal('show');
+        }
+
+        $scope.handleMovie = function() {
+            // Validacija
+            if($scope.create) {
+                delete $scope.movie.id;
+                AdminService.createMovie($scope.movie);
+                $scope.movies.push(angular.copy($scope.movie));
+            } else {
+                AdminService.updateMovie($scope.movie);
+                for(i=0; i < $scope.movies.length; i++) {
+                    if($scope.movies[i].id == $scope.movie.id) {
+                        $scope.movies[i] = angular.copy($scope.movie);
+                        break;
+                    }
+                }
+            }
+            $scope.cleanMovieDialog();
+        }
+
+        $scope.resetMovie = function() {
+            $scope.movie.id = null;
+            $scope.movie.name = '';
+            $scope.movie.duration = '';
+            $scope.movie.description = '';
+            $scope.movie.director = '';
+            $scope.movie.genre = '';
+        }
+
     }]);

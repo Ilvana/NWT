@@ -66,4 +66,71 @@ app.service('AdminService', ['$http', '$q', '$log', function ($http, $q, $log) {
     };
 
 
+
+    this.getMovies = function () {
+        var deferred = $q.defer();
+        $http.get('/movie')
+            .success(function (data) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                $log.log(data, status, headers, config);
+            });
+        return deferred.promise;
+    };
+    this.getMovie = function (id) {
+        var deferred = $q.defer();
+        $http.get('/movie/'+id)
+            .success(function (data) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                $log.log(data, status, headers, config);
+            });
+        return deferred.promise;
+    };
+
+    this.deleteMovie = function (item) {
+        var deferred = $q.defer();
+        $http.delete('/movie/' + item.id).success(function (data) {
+            deferred.resolve();
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+        });
+        return deferred.promise;
+    };
+    this.createMovie = function (movie) {
+
+        var deferred = $q.defer();
+
+        var movieToSend = angular.copy(movie);
+
+        movieToSend.role = movieToSend.admin ? 'ROLE_ADMIN' : 'ROLE_USER';
+
+        $http.post('/movie', movieToSend).success(function () {
+            deferred.resolve();
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+    this.updateMovie = function (movie) {
+
+        var deferred = $q.defer();
+
+        var movieToSend = angular.copy(movie);
+
+        movieToSend.role = movieToSend.admin ? 'ROLE_ADMIN' : 'ROLE_USER';
+
+        $http.put('/movie/'+movieToSend.id, movieToSend).success(function () {
+            deferred.resolve();
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
+
 }]);
