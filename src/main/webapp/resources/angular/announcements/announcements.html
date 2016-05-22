@@ -1,19 +1,25 @@
 <section>
-    <div class="container">
+    <div class="container" style="width: 23cm;">
         <div class="row">
-            <div class="col-sm-9">
-                <div class="blog-post-area">
-                    <h2 class="title text-center" translate>announcesment.title.label</h2>
+            <div class="col-sm-12">
+                <div ng-include="announcementTemplate"/>
+            </div>
+        </div>
+    </div>
+</section>
 
-                    <div class="single-blog-post" ng-repeat="event in events">
-                        <h3>{{event.name}}</h3>
+<script type="text/ng-template" id="announcements">
+    <div class="blog-post-area">
+        <h2 class="title text-center" translate>announcesment.title.label</h2>
 
-                        <div class="post-meta">
-                            <ul>
-                                <!--<li><i class="fa fa-user"></i> Mac Doe</li>-->
-                                <li><i class="fa fa-clock-o"></i> {{time}}</li>
-                                <li><i class="fa fa-calendar"></i> {{date}}</li>
-                            </ul>
+        <div class="single-blog-post" ng-repeat="event in events">
+            <h3>{{event.name}}</h3>
+
+            <div class="post-meta">
+                <ul>
+                    <li><i class="fa fa-clock-o"></i> {{event.time}}</li>
+                    <li><i class="fa fa-calendar"></i> {{event.date}}</li>
+                </ul>
 								<span>
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>
@@ -21,16 +27,44 @@
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star-half-o"></i>
 								</span>
-                        </div>
-                        <a href="">
-                            <img src="/resources/images/blog/blog-one.jpg" alt="">
-                        </a>
-
-                        <p ng-model="event.description.label">{{event.description | translate}}</p>
-                        <a class="btn btn-primary" href="" translate>announcesment.readMore.label</a>
-                    </div>
-                </div>
             </div>
+            <a href="">
+                <img src="/resources/images/blog/blog-one.jpg" alt="">
+            </a>
+
+            <p>{{ event.description | limitTo : 100 : 0}}</p>
+            <button class="btn btn-primary pull-right" ng-click="showDetails(event)" translate>
+                announcesment.readMore.label
+            </button>
+            <br>
         </div>
     </div>
-</section>
+</script>
+
+<script type="text/ng-template" id="announcement">
+    <div class="blog-post-area">
+
+        <div class="single-blog-post">
+            <h3 class="text-center">{{oneEvent.name}}</h3>
+
+            <div class="post-meta">
+                <ul>
+                    <li><i class="fa fa-clock-o"></i> {{oneEvent.time}}</li>
+                    <li><i class="fa fa-calendar"></i> {{oneEvent.date}}</li>
+                </ul>
+								<span>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-half-o"></i>
+								</span>
+            </div>
+            <a href="">
+                <img src="/resources/images/blog/blog-one.jpg" alt="">
+            </a>
+            <p>{{ oneEvent.description }}</p>
+            <br>
+        </div>
+    </div>
+</script>

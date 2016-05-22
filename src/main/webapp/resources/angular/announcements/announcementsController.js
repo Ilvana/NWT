@@ -1,16 +1,27 @@
-app.controller("AnnouncementsController", ['$scope','$filter', '$log', "AnnouncementsService", "$http", "$window",
-    function ($scope, $filter, $log, AnnouncementsService, $http, $window) {
+app.controller("AnnouncementsController", ['$scope','$filter', '$log', "AnnouncementsService","$http", "$window",
+    function ($scope, $filter, $log, AnnouncementsService) {
 
+        $scope.announcementTemplate = 'announcements';
         $scope.events = [];
-        $scope.date=null;
-        $scope.time=null;
+        $scope.oneEvent = {
+            'id': null,
+            'name': '',
+            'description': '',
+            'timeBegin': '',
+            'timeEnd': ''
+        };
 
         AnnouncementsService.getAllEvents().then(function (data) {
             $scope.events = data;
-            $log.log($scope.events.length);
-                angular.forEach($scope.events, function(event) {
-                    $scope.date = event.timeBegin.split(' ')[0];
-                    $scope.time = event.timeBegin.split(' ')[1];
-                });
+            angular.forEach($scope.events, function(event) {
+                event.date = event.timeBegin.split(' ')[0];
+                event.time = event.timeBegin.split(' ')[1];
+            });
         });
+
+        $scope.showDetails = function(event) {
+
+            $scope.oneEvent=angular.copy(event);
+            $scope.announcementTemplate = 'announcement';
+        }
     }]);

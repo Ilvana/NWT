@@ -1,9 +1,8 @@
-app.service('AnnouncementsService', ['$http', '$q', '$log', function ($http, $q, $log) {
+app.service('AnnouncementsService', ['$http', '$q', '$log','$window', function ($http, $q, $log) {
 
     this.getAllEvents = function () {
 
         var deferred = $q.defer();
-        var that = this;
 
         var url = '/event';
 
@@ -12,11 +11,8 @@ app.service('AnnouncementsService', ['$http', '$q', '$log', function ($http, $q,
                 'Content-type': 'Application/json'
             }
         }).success(function (data) {
-            var events = [];
 
-            events= data;
-
-            deferred.resolve(events);
+            deferred.resolve(data);
 
         }).error(function (data, status, headers, config) {
             $log.log(data, status, headers, config);
