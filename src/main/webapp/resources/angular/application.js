@@ -1,6 +1,6 @@
-var app = angular.module('Application', ['pascalprecht.translate','ngRoute', 'ngCookies', 'controllers', 'services']);
+var app = angular.module('Application', ['pascalprecht.translate','ngRoute', 'ngCookies', 'controllers', 'services', 'chart.js']);
 
-app.config(function ($translateProvider, $routeProvider, $httpProvider) {
+app.config(function ($translateProvider, $routeProvider, $httpProvider, ChartJsProvider) {
 
     $routeProvider
         .when('/', {
@@ -39,6 +39,10 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider) {
             templateUrl: '/resources/angular/registration/registration.html',
             controller: 'RegistrationController'
         })
+        .when('/statistic', {
+            templateUrl: '/resources/angular/statistic/statistic.html',
+            controller: 'StatisticController'
+        })
         .when('/admin', {
             templateUrl: '/resources/angular/admin/admin.html',
             controller: 'AdminController'
@@ -54,5 +58,13 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider) {
     $translateProvider.useStorage('UrlLanguageStorage');
     $translateProvider.preferredLanguage('en');
     $translateProvider.fallbackLanguage('en');
+
+    ChartJsProvider.setOptions({
+      colours: ['#FF5252', '#FF8A80'],
+      responsive: false
+    });
+    ChartJsProvider.setOptions('Line', {
+      datasetFill: false
+    });
 
 });
