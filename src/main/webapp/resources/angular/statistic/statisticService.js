@@ -9,4 +9,14 @@ app.service('StatisticService', ['$http', '$q', '$log', function ($http, $q, $lo
             });
         return deferred.promise;
     }
+    this.getMonthlyScreenings = function() {
+        var deferred = $q.defer();
+        $http.get('/screening/monthly')
+            .success(function (data) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                $log.log(data, status, headers, config);
+            });
+        return deferred.promise;
+    }
 }]);

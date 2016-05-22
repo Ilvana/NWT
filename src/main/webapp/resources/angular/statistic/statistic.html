@@ -1,12 +1,26 @@
-<div class="container text-center">
-    <canvas id="line"
-            width="700"
-            height="300"
-            class="chart chart-line"
-            chart-data="data"
-            chart-labels="labels"
-            chart-legend="true"
-            chart-series="series"
-            chart-click="onClick">
-    </canvas>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" ng-class="{ 'active' : templatePath == 'screeningsPerDay' }">
+                    <a ng-click="loadChart('screeningsPerDay')" translate>stats.menu.daily.screenings</a>
+                </li>
+                <li role="presentation" ng-class="{ 'active' : templatePath == 'screeningsPerMonth' }">
+                    <a ng-click="loadChart('screeningsPerMonth')" translate>stats.menu.monthly.screenings</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-10 col-md-10 text-center">
+            <canvas id="line"
+                    width="600"
+                    height="300"
+                    class="chart chart-line"
+                    chart-data="data"
+                    chart-labels="labels"
+                    chart-legend="true"
+                    chart-series="series"
+                    chart-click="onClick">
+            </canvas>
+        </div>
+    </div>
 </div>

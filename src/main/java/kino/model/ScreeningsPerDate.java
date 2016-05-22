@@ -5,11 +5,11 @@ import kino.utils.CustomDateSerializer;
 
 import java.util.Date;
 
-public class ScreeningsPerDay {
+public class ScreeningsPerDate {
     private Date date;
     private Integer numberOfScreenings;
 
-    public ScreeningsPerDay(Date date, Integer numberOfScreenings) {
+    public ScreeningsPerDate(Date date, Integer numberOfScreenings) {
         this.date = date;
         this.numberOfScreenings = numberOfScreenings;
     }
