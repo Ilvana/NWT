@@ -15,6 +15,10 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider) {
             templateUrl: '/resources/angular/announcements/announcements.html',
             controller: 'AnnouncementsController'
         })
+        .when('/announcement', {
+            templateUrl: '/resources/angular/announcements/announcement.html',
+            controller: 'AnnouncementsController'
+        })
         .when('/login', {
             templateUrl: '/resources/angular/login/login.html',
             controller: 'LoginController'

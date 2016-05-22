@@ -5,8 +5,8 @@
                 <div class="blog-post-area">
                     <h2 class="title text-center" translate>announcesment.title.label</h2>
 
-                    <div class="single-blog-post" ng-repeat="event in events">
-                        <h3>{{event.name}}</h3>
+                    <div class="single-blog-post">
+                        <h3>{{oneEvent.name}}</h3>
 
                         <div class="post-meta">
                             <ul>
@@ -26,11 +26,8 @@
                             <img src="/resources/images/blog/blog-one.jpg" alt="">
                         </a>
 
-                        <p ng-model="event.description.label">{{event.description | translate}}</p>
-                        <button class="btn btn-primary pull-right" ng-click="showDetails(event)" translate>
-                            announcesment.readMore.label
-                        </button>
-                        <!--<a class="btn btn-primary" href="" translate>announcesment.readMore.label</a>-->
+                        <p ng-model="event.description.label">{{oneEvent.description | translate}}</p>
+                        <br>
                     </div>
                 </div>
             </div>

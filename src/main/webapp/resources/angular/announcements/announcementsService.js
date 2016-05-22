@@ -1,4 +1,4 @@
-app.service('AnnouncementsService', ['$http', '$q', '$log', function ($http, $q, $log) {
+app.service('AnnouncementsService', ['$http', '$q', '$log','$window', function ($http, $q, $log,$window) {
 
     this.getAllEvents = function () {
 
@@ -23,6 +23,18 @@ app.service('AnnouncementsService', ['$http', '$q', '$log', function ($http, $q,
             deferred.reject();
         });
 
+        return deferred.promise;
+    };
+
+    this.showDetails = function (data) {
+
+        var deferred = $q.defer();
+        var that = this;
+        $log.log("ilvana2");
+        var oneEvent=data;
+        $log.log("data"+data.name);
+        $window.location.href = "/#/announcement";
+        deferred.resolve(oneEvent);
         return deferred.promise;
     };
 }]);
