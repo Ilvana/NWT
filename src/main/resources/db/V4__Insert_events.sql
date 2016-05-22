@@ -1,0 +1,2 @@
+INSERT INTO kino.event (description, name, timeBegin, timeEnd) VALUES ('Crazy party.', 'Mucha Lucha', '2016-05-22 19:38:53', '2016-05-22 19:38:56');
+INSERT INTO kino.event (description, name, timeBegin, timeEnd) VALUES ('Jazz music.', 'Jazzer', '2016-05-23 17:57:01', '2016-05-27 22:57:06');
