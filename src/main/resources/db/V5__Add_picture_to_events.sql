@@ -1,0 +1,1 @@
+ALTER TABLE kino.event ADD COLUMN picture VARCHAR(100);
