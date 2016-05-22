@@ -170,4 +170,80 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             $scope.movie.genre = '';
         }
 
+
+
+
+        $scope.theaters = [];
+
+        $scope.theater = {
+            'id': null,
+            'name': '',
+            'duration': '',
+            'description': '',
+            'director': '',
+            'genre': '',
+        };
+
+        AdminService.getTheaters().then(function(data) {
+            $scope.theaters = data;
+        });
+
+        $scope.deleteTheater = function(theater) {
+            var index = $scope.theaters.indexOf(theater);
+            if (index == -1) {
+                return;
+            }
+            AdminService.deleteTheater(theater).then(function () {
+                $scope.theaters.splice(index, 1);
+            }, function() { $window.location.href='/404' });
+        };
+
+        $scope.editTheater = function(theater) {
+            $scope.submitModal = 'Update';
+            $scope.modalHeader = 'Update theater';
+            $scope.create = false;
+            $scope.theater = angular.copy(theater);
+            $(angular.element(theaterModal)).modal('show');
+        }
+
+        $scope.cleanTheaterDialog = function() {
+            $scope.resetTheater();
+            $(angular.element(theaterModal)).modal("hide");
+            // Clean input
+
+            // Set current theater to default
+        }
+
+        $scope.createTheater = function() {
+            $scope.submitModal = 'Create';
+            $scope.modalHeader = 'Create new theater';
+            $scope.create = true;
+            $(angular.element(theaterModal)).modal('show');
+        }
+
+        $scope.handleTheater = function() {
+            // Validacija
+            if($scope.create) {
+                delete $scope.theater.id;
+                AdminService.createTheater($scope.theater);
+                $scope.theaters.push(angular.copy($scope.theater));
+            } else {
+                AdminService.updateTheater($scope.theater);
+                for(i=0; i < $scope.theaters.length; i++) {
+                    if($scope.theaters[i].id == $scope.theater.id) {
+                        $scope.theaters[i] = angular.copy($scope.theater);
+                        break;
+                    }
+                }
+            }
+            $scope.cleanTheaterDialog();
+        }
+
+        $scope.resetTheater = function() {
+            $scope.theater.id = null;
+            $scope.theater.name = '';
+            $scope.theater.sizeX = '';
+            $scope.theater.sizeY = '';
+        }
+
     }]);

@@ -69,7 +69,30 @@
 </script>
 
 <script type="text/ng-template" id="theaters">
-    Theaters
+    <button type="button"
+            data-toggle="modal"
+            ng-click="createTheater()"
+            class="pull-right btn btn-success" translate>admin.add.new.theater.button</button>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th translate>admin.theaters.theater.name</th>
+            <th translate>admin.theaters.theater.sizeX</th>
+            <th translate>admin.theaters.theater.sizeY</th>
+            <th translate>admin.theaters.theater.edit</th>
+            <th translate>admin.theaters.theater.delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="theater in theaters">
+            <td>{{ theater.name }}</td>
+            <td>{{ theater.sizeX }}</td>
+            <td>{{ theater.sizeY }}</td>
+            <td><button class="btn btn-warning" ng-click="editTheater(theater)"><span class="glyphicon glyphicon-edit"></span></button> </td>
+            <td><button class="btn btn-danger" ng-click="deleteTheater(theater)"><span class="glyphicon glyphicon-remove"></span></button> </td>
+        </tr>
+        </tbody>
+    </table>
 </script>
 
 
@@ -175,6 +198,49 @@
                 <button type="button"
                         class="btn btn-success"
                         ng-click="handleMovie()"
+                        aria-hidden="true">{{ submitModal }}
+                </button>
+            </div>
+            <!-- // modal footer end -->
+
+        </div>
+    </div>
+</div>
+
+
+<!--Modal-->
+<div class="modal fade"
+     id="theaterModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <!-- modal create new application start -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title text-uppercase">{{ modalHeader }}</h2>
+            </div>
+            <div class="modal-body"> <!-- modal body start -->
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="theaterName" placeholder="Name" ng-model="theater.name">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="XDimension" placeholder="X Dimension" ng-model="theater.sizeX">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="YDimension" placeholder="Y Dimension" ng-model="theater.sizeY">
+                    </div>
+                </form>
+            </div>
+            <!-- // modal body end -->
+
+            <div class="modal-footer"> <!-- modal footer start -->
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true" ng-click="cleanTheaterDialog()">Cancel</button>
+                <button type="button"
+                        class="btn btn-success"
+                        ng-click="handleTheater()"
                         aria-hidden="true">{{ submitModal }}
                 </button>
             </div>
