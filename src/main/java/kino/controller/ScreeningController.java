@@ -1,6 +1,7 @@
 package kino.controller;
 
 import kino.model.ModelFactory;
+import kino.model.ScreeningsPerDate;
 import kino.model.entities.Screening;
 import kino.model.presentation.ScreeningViewModel;
 import kino.utils.ErrorGenerator;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import org.slf4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping("/screening")
@@ -76,6 +77,86 @@ public class ScreeningController {
             );
         } catch (Exception e) {
             logger.error("Something unusual happened. Please try again later.", e);
+            return new ResponseEntity(
+                    ErrorGenerator.generateError("Something unusual happened. Please try again later."), HttpStatus.NOT_FOUND
+            );
+        }
+    }
+    @RequestMapping(value = "/daily", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getScreeningsPerDay() {
+        try {
+            List<ScreeningsPerDate> screeningsPerDays = new ArrayList<>(7);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(sdf.parse(sdf.format(new Date())));
+
+            Calendar calendar = Calendar.getInstance();
+
+            for(int i=1; i <= 7; i++) {
+
+                Date dateBegin = c.getTime();
+                calendar.setTime(dateBegin);
+                calendar.add(Calendar.DATE, 1);
+                Date dateEnd = calendar.getTime();
+                Integer numberOfScreenings = modelFactory.ScreeningRepository().getScreeningsNumberPerDate(dateBegin, dateEnd);
+
+                ScreeningsPerDate screeningsPerDay = new ScreeningsPerDate(dateBegin, numberOfScreenings);
+
+                screeningsPerDays.add(screeningsPerDay);
+
+                c.add(Calendar.DATE, 1);
+            }
+
+            return new ResponseEntity(screeningsPerDays, HttpStatus.OK);
+
+        } catch (Exception e) {
+            logger.error("Failed to fetch screenings per day.", e);
+            return new ResponseEntity(
+                    ErrorGenerator.generateError("Something unusual happened. Please try again later."), HttpStatus.NOT_FOUND
+            );
+        }
+    }
+    @RequestMapping(value = "/monthly", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getScreeningsPerMonth() {
+        try {
+            List<ScreeningsPerDate> screeningsPerMonths = new ArrayList<>(5);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar c = GregorianCalendar.getInstance();
+            c.setTime(new Date());
+            c.set(Calendar.DAY_OF_MONTH,
+                    c.getActualMinimum(Calendar.DAY_OF_MONTH));
+            c.set(Calendar.MONTH, Calendar.MONTH-1);
+            c.set(Calendar.HOUR_OF_DAY, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MILLISECOND, 0);
+
+            Calendar calendar = Calendar.getInstance();
+
+            for(int i=1; i <= 5; i++) {
+
+                Date dateBegin = c.getTime();
+
+                calendar.setTime(dateBegin);
+                calendar.add(Calendar.MONTH, 1);
+                Date dateEnd = calendar.getTime();
+                Integer numberOfScreenings = modelFactory.ScreeningRepository().getScreeningsNumberPerDate(dateBegin, dateEnd);
+
+                ScreeningsPerDate screeningsPerDay = new ScreeningsPerDate(dateBegin, numberOfScreenings);
+
+                screeningsPerMonths.add(screeningsPerDay);
+
+                c.add(Calendar.MONTH, 1);
+            }
+
+            return new ResponseEntity(screeningsPerMonths, HttpStatus.OK);
+
+        } catch (Exception e) {
+            logger.error("Failed to fetch screenings per month.", e);
             return new ResponseEntity(
                     ErrorGenerator.generateError("Something unusual happened. Please try again later."), HttpStatus.NOT_FOUND
             );

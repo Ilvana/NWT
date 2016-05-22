@@ -7,16 +7,18 @@
     <meta name="author" content="">
     <title>Home | Cinema</title>
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/css/font-awesome.min.css" rel="stylesheet">
+    <%--<link href="resources/css/font-awesome.min.css" rel="stylesheet">--%>
     <link href="resources/css/prettyPhoto.css" rel="stylesheet">
     <link href="resources/css/price-range.css" rel="stylesheet">
     <link href="resources/css/animate.css" rel="stylesheet">
     <link href="resources/css/main.css" rel="stylesheet">
     <link href="resources/css/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/angular-chart.css" />
     <!--[if lt IE 9]>
     <script src="resources/js/html5shiv.js"></script>
     <script src="resources/js/respond.min.js"></script>
     <![endif]-->
+    <script src="https://use.fontawesome.com/ad58ca6dfc.js"></script>
 
     <!-- AngularJS -->
     <script src='resources/static/angular/angular.js'></script>
@@ -24,6 +26,9 @@
     <script src='resources/static/angular/angular-cookies.js'></script>
     <script type="text/javascript" src="resources/static/angular/angular-translate.min.js"></script>
     <script type="text/javascript" src="resources/static/angular/angular-translate-loader-url.min.js"></script>
+    <%--Angular Chart--%>
+    <script src="resources/js/chart.js"></script>
+    <script src="resources/static/angular/angular-chart.js"></script>
 
     <!-- Custom angular -->
 
@@ -53,6 +58,9 @@
 
     <script src="resources/angular/admin/adminController.js" type="text/javascript"></script>
     <script src="resources/angular/admin/adminService.js" type="text/javascript"></script>
+
+    <script src="resources/angular/statistic/statisticController.js" type="text/javascript"></script>
+    <script src="resources/angular/statistic/statisticService.js" type="text/javascript"></script>
 
     <!-- reCAPTCHA -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
