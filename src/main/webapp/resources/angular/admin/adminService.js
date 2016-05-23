@@ -132,11 +132,6 @@ app.service('AdminService', ['$http', '$q', '$log', function ($http, $q, $log) {
         return deferred.promise;
     };
 
-
-
-
-
-
     this.getTheaters = function () {
         var deferred = $q.defer();
         $http.get('/theater')
