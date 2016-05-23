@@ -5,6 +5,8 @@
             <li role="presentation" ng-class="{ 'active' : templatePath == 'users' }"><a ng-click="loadTemplate('users')" translate>admin.menu.users</a></li>
             <li role="presentation" ng-class="{ 'active' : templatePath == 'movies' }"><a ng-click="loadTemplate('movies')" translate>admin.menu.movies</a></li>
             <li role="presentation" ng-class="{ 'active' : templatePath == 'theaters' }"><a ng-click="loadTemplate('theaters')" translate>admin.menu.theaters</a></li>
+            <li role="presentation" ng-class="{ 'active' : templatePath == 'events' }"><a ng-click="loadTemplate('events')" translate>admin.menu.events</a></li>
+
         </ul>
     </div>
     <div class="col-lg-9 col-md-9">
@@ -13,6 +15,35 @@
 </div>
 </div>
 
+<script type="text/ng-template" id="events">
+    <button type="button"
+            data-toggle="modal"
+            ng-click="createEvent()"
+            class="pull-right btn btn-success" translate>admin.add.new.event.button</button>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th translate>admin.events.event.name</th>
+            <th translate>admin.events.event.description</th>
+            <th translate>admin.events.event.timeBegin</th>
+            <th translate>admin.events.event.timeEnd</th>
+            <th translate>admin.events.event.edit</th>
+            <th translate>admin.events.event.delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="event in events">
+            <td>{{ event.name }}</td>
+            <td>{{ event.description }}</td>
+            <td>{{ event.timeBegin }}</td>
+            <td>{{ event.dateEnd }}</td>
+
+            <td><button class="btn btn-warning" ng-click="editEvent(event)"><span class="glyphicon glyphicon-edit"></span></button> </td>
+            <td><button class="btn btn-danger" ng-click="deleteEvent(event)"><span class="glyphicon glyphicon-remove"></span></button> </td>
+        </tr>
+        </tbody>
+    </table>
+</script>
 
 <script type="text/ng-template" id="users">
     <button type="button"
@@ -241,6 +272,56 @@
                 <button type="button"
                         class="btn btn-success"
                         ng-click="handleTheater()"
+                        aria-hidden="true">{{ submitModal }}
+                </button>
+            </div>
+            <!-- // modal footer end -->
+
+        </div>
+    </div>
+</div>
+
+
+<!--Modal-->
+<div class="modal fade"
+     id="eventModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <!-- modal create new application start -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title text-uppercase">{{ modalHeader }}</h2>
+            </div>
+            <div class="modal-body"> <!-- modal body start -->
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="eventName" placeholder="Name" ng-model="event.name">
+                    </div>
+                    <div class="form-group">
+                        <textarea type="text" class="form-control" id="eventDescripton" placeholder="Description"
+                                  ng-model="event.description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="eventTimeBegin" placeholder="Name" ng-model="event.timeBegin">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="eventTimeEnd" placeholder="Name" ng-model="event.timeEnd">
+                    </div>
+
+                </form>
+            </div>
+            <!-- // modal body end -->
+
+            <div class="modal-footer"> <!-- modal footer start -->
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true"
+                        ng-click="cleanEventDialog()">Cancel
+                </button>
+                <button type="button"
+                        class="btn btn-success"
+                        ng-click="handleEvent()"
                         aria-hidden="true">{{ submitModal }}
                 </button>
             </div>

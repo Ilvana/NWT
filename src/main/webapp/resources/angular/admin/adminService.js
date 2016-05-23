@@ -202,4 +202,57 @@ app.service('AdminService', ['$http', '$q', '$log', function ($http, $q, $log) {
         return deferred.promise;
     };
 
+    this.getEvents = function () {
+        var deferred = $q.defer();
+        $http.get('/event')
+            .success(function (data) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                $log.log(data, status, headers, config);
+            });
+        return deferred.promise;
+    };
+
+    this.deleteEvent = function (item) {
+        var deferred = $q.defer();
+        $http.delete('/event/' + item.id).success(function (data) {
+            deferred.resolve();
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+        });
+        return deferred.promise;
+    };
+
+    this.createEvent = function (event) {
+
+        var deferred = $q.defer();
+
+        var eventToSend = angular.copy(event);
+
+        $http.post('/event', eventToSend).success(function () {
+            $log.log("ilvana");
+            deferred.resolve();
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+    this.updateEvent = function (event) {
+
+        var deferred = $q.defer();
+
+        var eventToSend = angular.copy(event);
+
+        $http.put('/event/'+eventToSend.id, eventToSend).success(function () {
+            deferred.resolve();
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
 }]);

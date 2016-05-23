@@ -245,5 +245,81 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             $scope.theater.sizeX = '';
             $scope.theater.sizeY = '';
         }
+        $scope.events = [];
+        $scope.event = {
+            'id': null,
+            'name': '',
+            'description': '',
+            'timeBegin': '',
+            'timeEnd':'',
+            'picture':''
+        };
 
-    }]);
+        AdminService.getEvents().then(function(data) {
+            $scope.events = data;
+        });
+
+        $scope.deleteEvent = function(event) {
+            var index = $scope.events.indexOf(event);
+            if (index == -1) {
+                return;
+            }
+            AdminService.deleteEvent(event).then(function () {
+                $scope.events.splice(index, 1);
+            }, function () {
+                $window.location.href = '/404'
+            });
+        };
+        $scope.editEvent = function(event) {
+            $scope.submitModal = 'Update';
+            $scope.modalHeader = 'Update event';
+            $scope.create = false;
+            $scope.event = angular.copy(event);
+            $(angular.element(eventModal)).modal('show');
+        }
+
+        $scope.cleanEventDialog = function() {
+            $scope.resetEvent();
+            $(angular.element(eventModal)).modal("hide");
+            // Clean input
+        }
+
+        $scope.createEvent = function() {
+            $scope.submitModal = 'Create';
+            $scope.modalHeader = 'Create new event';
+            $scope.create = true;
+            $(angular.element(eventModal)).modal('show');
+        }
+
+        $scope.handleEvent = function() {
+            // Validacija
+            if($scope.create) {
+                delete $scope.event.id;
+                AdminService.createEvent($scope.event);
+                $scope.events.push(angular.copy($scope.event));
+            } else {
+                AdminService.updateEvent($scope.event);
+                for(i=0; i < $scope.events.length; i++) {
+                    if($scope.events[i].id == $scope.event.id) {
+                        $scope.events[i] = angular.copy($scope.event);
+                        break;
+                    }
+                }
+            }
+            $scope.cleanEventDialog();
+        }
+        $scope.resetEvent = function() {
+            $scope.event.id = null;
+            $scope.event.name = '';
+            $scope.event.description = '';
+            $scope.event.timeBegin = '';
+            $scope.event.timeEnd = '';
+
+        }
+
+    }
+
+]);
+
+
+
