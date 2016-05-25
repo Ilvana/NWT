@@ -21,6 +21,42 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
             }
         };
 
+        $scope.reserveTicket = function () {
+            ReserveTicketService.getUserLogged().then(function(data) {
+                var status = data;
+                //$log.log(status);
+                if(status == -1) {
+                    $window.location.replace('/#/loginOrRegister');
+                }
+                else {
+                    var tempScr = {
+                        id: $scope.currentScreening.id,
+                        timeBegin: null,
+                        timeEnd: null,
+                        movie: null,
+                        theater: null
+                    };
+                    angular.forEach($scope.currentReservations, function(currentRes) {
+                        var tempTicket = {
+                            seatX: currentRes.positionX,
+                            seatY: currentRes.positionY,
+                            screening: tempScr,
+                            user: null
+                        };
+                        $log.log(tempTicket);
+                            ReserveTicketService.createNewTicket(tempTicket).then(
+                                function() {
+                                    $log.log("success")
+                                }, function() {
+                                    $window.location.replace('/403')}
+                            )
+                    });
+                }
+                }, function() {
+                    $window.location.replace('/403')}
+            );
+        };
+
         $scope.changeScreening = function(screeningId) {
             getTheaterAndTicketsForScreening($scope.screenings[screeningId]);
         };
@@ -45,6 +81,7 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
             $scope.seatsSchedule = [];
             $scope.currentTheater = screening.theater;
             $scope.currentScreening = screening;
+            $log.log($scope.currentScreening.timeBegin);
             ReserveTicketService.getAllTickets().then(function(data) {
                 var localTickets = data;
                 angular.forEach(localTickets, function(ticket) {
@@ -83,6 +120,7 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
                 angular.forEach(localScreenings, function(screening) {
                     if(screening.movie.id == movieId) {
                         $scope.screenings.push(screening);
+                        $log.log(screening.timeBegin);
                         //sorting needed here
                     }
                 });
@@ -95,6 +133,9 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
                     dateStr = screening.timeEnd.split(' ')[0].split('-');
                     var timeStr = screening.timeEnd.split(' ')[1].split(':');
                     var newDateEnd =new Date(dateStr[2], parseInt(dateStr[1])-1, dateStr[0], timeStr[0], timeStr[1], timeStr[2]);
+
+                    //screening.timeBegin = $filter('date')(newDateBegin, "yyyy-MM-dd HH:mm:ss");
+                    //screening.timeEnd = $filter('date')(newDateEnd, "yyyy-MM-dd HH:mm:ss");
 
                     var tempDateBegin = $filter('date')(newDateBegin, "HH:mm");
                     var tempDateEnd = $filter('date')(newDateEnd, "HH:mm");
