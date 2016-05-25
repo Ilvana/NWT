@@ -121,17 +121,8 @@ public class UserController {
 
     }
     @RequestMapping("/logged")
-    public int isLoggedIn(HttpServletRequest request) {
-        if (request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_USER")) {
-
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            if (!(auth instanceof AnonymousAuthenticationToken)) {
-                //int id = ((User) auth.getPrincipal()).getId();
-                int id = 30;//PROMJENITI!!!
-                return id;
-            }
-        }
-        return -1;
+    public HttpStatus isLoggedIn(HttpServletRequest request) {
+        return (request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_USER")) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
     }
     @RequestMapping(value = "/newPassword/{token}", method = RequestMethod.POST)
     public ResponseEntity createNewPassword(@PathVariable("token") String token, @RequestBody String password) {

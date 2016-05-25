@@ -22,40 +22,32 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
         };
 
         $scope.reserveTicket = function () {
-            ReserveTicketService.getUserLogged().then(function(data) {
-                var status = data;
-                //$log.log(status);
-                if(status == -1) {
+            ReserveTicketService.getUserLogged().then(
+            function() {
+                delete $scope.currentScreening.timeBegin;
+                delete $scope.currentScreening.timeEnd;
+
+                angular.forEach($scope.currentReservations, function(currentRes) {
+                    var tempTicket = {
+                        seatX: currentRes.positionX,
+                        seatY: currentRes.positionY,
+                        screening: $scope.currentScreening,
+                        user: null
+                    };
+
+                    ReserveTicketService.createNewTicket(tempTicket).then(
+                        function(data) {
+                            $window.location.replace('/#/');
+                        },
+                        function() {
+                            $window.location.replace('/403');
+                        }
+                    )
+                });
+                },
+                function() {
                     $window.location.replace('/#/loginOrRegister');
                 }
-                else {
-                    var tempScr = {
-                        id: $scope.currentScreening.id,
-                        timeBegin: null,
-                        timeEnd: null,
-                        movie: null,
-                        theater: null
-                    };
-                    angular.forEach($scope.currentReservations, function(currentRes) {
-                        var tempTicket = {
-                            seatX: currentRes.positionX,
-                            seatY: currentRes.positionY,
-                            screening: tempScr,
-                            user: null
-                        };
-                        $log.log(tempTicket);
-                            ReserveTicketService.createNewTicket(tempTicket).then(
-                                function(data) {
-                                    $window.location.replace('/#/');
-                                },
-                                function() {
-                                    $window.location.replace('/403');
-                                }
-                            )
-                    });
-                }
-                }, function() {
-                    $window.location.replace('/403')}
             );
         };
 

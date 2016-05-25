@@ -47,11 +47,8 @@ app.service('ReserveTicketService', ['$http', '$q', '$log', function ($http, $q,
         var url = '/user/logged';
 
         $http.get(url).success(function (data) {
-            var status = null;
 
-            status = data;
-
-            deferred.resolve(status);
+            deferred.resolve(data);
 
         }).error(function (data, status, headers, config) {
             $log.log(data, status, headers, config);
