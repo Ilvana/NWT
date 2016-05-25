@@ -45,10 +45,12 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
                         };
                         $log.log(tempTicket);
                             ReserveTicketService.createNewTicket(tempTicket).then(
+                                function(data) {
+                                    $window.location.replace('/#/');
+                                },
                                 function() {
-                                    $log.log("success")
-                                }, function() {
-                                    $window.location.replace('/403')}
+                                    $window.location.replace('/403');
+                                }
                             )
                     });
                 }

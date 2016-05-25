@@ -30,8 +30,8 @@ app.service('ReserveTicketService', ['$http', '$q', '$log', function ($http, $q,
         var deferred = $q.defer();
 
         $http.post('/ticket', ticket, {  headers: { 'Content-Type': 'application/json' } }
-        ).success(function () {
-            deferred.resolve();
+        ).success(function (data) {
+            deferred.resolve(data);
         }).error(function (data, status, headers, config) {
             $log.log(data, status, headers, config);
             deferred.reject();
