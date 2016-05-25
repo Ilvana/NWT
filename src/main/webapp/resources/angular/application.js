@@ -50,6 +50,10 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider, ChartJsP
         .when('/admin', {
             templateUrl: '/resources/angular/admin/admin.html',
             controller: 'AdminController'
+        })
+        .when('/loginOrRegister', {
+            templateUrl: '/resources/angular/loginOrRegister/loginOrRegister.html',
+            controller: 'LoginOrRegisterController'
         });
 
     $httpProvider.defaults.headers.common = {Accept: "application/json"};

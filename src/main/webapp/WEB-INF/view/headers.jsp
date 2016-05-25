@@ -51,6 +51,8 @@
     <script src="resources/angular/reserveTicket/reserveTicketService.js" type="text/javascript"></script>
     <script src="resources/angular/reserveTicket/reserveTicketController.js" type="text/javascript"></script>
 
+    <script src="resources/angular/loginOrRegister/loginOrRegisterController.js" type="text/javascript"></script>
+
     <script src="resources/angular/login/loginController.js" type="text/javascript"></script>
     <script src="resources/angular/reset/resetController.js" type="text/javascript"></script>
     <script src="resources/angular/newPassword/newPasswordController.js" type="text/javascript"></script>
