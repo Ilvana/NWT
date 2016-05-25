@@ -1,6 +1,14 @@
 app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', '$log', '$window', '$http', 'ReserveTicketService', 'HomeService',
     function ($scope, $routeParams, $filter, $log, $window, $http, ReserveTicketService, HomeService) {
 
+        ReserveTicketService.getUserLogged().then(
+            function() {
+                $log.log("Creating reservation service for logged user.");
+            },
+            function() {
+                $window.location.replace('/#/loginOrRegister');
+            }
+        );
 
         $scope.tempRes = "";
         $scope.changeReservation = function(seatX,seatY,status) {
@@ -22,33 +30,28 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
         };
 
         $scope.reserveTicket = function () {
-            ReserveTicketService.getUserLogged().then(
-            function() {
-                delete $scope.currentScreening.timeBegin;
-                delete $scope.currentScreening.timeEnd;
 
-                angular.forEach($scope.currentReservations, function(currentRes) {
-                    var tempTicket = {
-                        seatX: currentRes.positionX,
-                        seatY: currentRes.positionY,
-                        screening: $scope.currentScreening,
-                        user: null
-                    };
+            delete $scope.currentScreening.timeBegin;
+            delete $scope.currentScreening.timeEnd;
 
-                    ReserveTicketService.createNewTicket(tempTicket).then(
-                        function(data) {
-                            $window.location.replace('/#/');
-                        },
-                        function() {
-                            $window.location.replace('/403');
-                        }
-                    )
-                });
-                },
-                function() {
-                    $window.location.replace('/#/loginOrRegister');
-                }
-            );
+            angular.forEach($scope.currentReservations, function(currentRes) {
+                var tempTicket = {
+                    seatX: currentRes.positionX,
+                    seatY: currentRes.positionY,
+                    screening: $scope.currentScreening,
+                    user: null
+                };
+
+                ReserveTicketService.createNewTicket(tempTicket).then(
+                    function(data) {
+                        $log.log("New ticket reserved successfully.");
+                    },
+                    function() {
+                        $window.location.replace('/403');
+                    }
+                )
+            });
+            $window.location.replace('/#/');
         };
 
         $scope.changeScreening = function(screeningId) {
