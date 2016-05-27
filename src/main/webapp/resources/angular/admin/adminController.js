@@ -245,6 +245,9 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             $scope.theater.sizeX = '';
             $scope.theater.sizeY = '';
         }
+
+        $('#timeBegin').datetimepicker();
+        $('#timeEnd').datetimepicker();
         $scope.events = [];
         $scope.event = {
             'id': null,
@@ -293,11 +296,19 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
 
         $scope.handleEvent = function() {
             // Validacija
+            $scope.event.timeBegin = new Date($('#timeBegin').val());
+            $scope.event.timeEnd = new Date($('#timeEnd').val());
             if($scope.create) {
                 delete $scope.event.id;
                 AdminService.createEvent($scope.event);
                 $scope.events.push(angular.copy($scope.event));
             } else {
+                dB = $('#timeBegin').val().split(' ')[0].split('-');
+                dE = $('#timeEnd').val().split(' ')[0].split('-');
+                tB = $('#timeBegin').val().split(' ')[1].split(':');
+                tE = $('#timeEnd').val().split(' ')[1].split(':');
+                $scope.event.timeBegin = new Date(dB[2], dB[1], dB[0], +1, tB[0], tB[1], tB[2]);
+                $scope.event.timeEnd = new Date(dE[2], dE[1], dE[0], +1, tE[0], tE[1], tE[2]);
                 AdminService.updateEvent($scope.event);
                 for(i=0; i < $scope.events.length; i++) {
                     if($scope.events[i].id == $scope.event.id) {
