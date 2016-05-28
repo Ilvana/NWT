@@ -106,6 +106,15 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             'genre': '',
         };
 
+        $scope.movieTmp = {
+            'id': null,
+            'name': '',
+            'duration': '',
+            'description': '',
+            'director': '',
+            'genre': '',
+        };
+
         AdminService.getMovies().then(function(data) {
             $scope.movies = data;
         });
@@ -183,6 +192,16 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             'director': '',
             'genre': '',
         };
+
+        $scope.theaterTmp = {
+            'id': null,
+            'name': '',
+            'duration': '',
+            'description': '',
+            'director': '',
+            'genre': '',
+        };
+
 
         AdminService.getTheaters().then(function(data) {
             $scope.theaters = data;
@@ -390,19 +409,25 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             // Validacija
             $scope.screening.timeBegin = new Date($('#timeBeginScreening').val());
             $scope.screening.timeEnd = new Date($('#timeEndScreening').val());
+            $scope.movieTmp.id=$('#screeningMovie').val();
+            $scope.screening.movie=angular.copy($scope.movieTmp);
+            $scope.theaterTmp.id=$('#screeningTheater').val();
+            $scope.screening.theater=angular.copy($scope.theaterTmp);
+            AdminService.getMovie($('#screeningMovie').val()).then(function(data) {
+                $log.log("filmic"+data.name);
+                $scope.movieTmp = data;
+                $scope.screening.movie=angular.copy($scope.movieTmp);
+            });
+            AdminService.getTheater($('#screeningTheater').val()).then(function(data) {
+                $log.log("teatar"+data.name);
+                $scope.theaterTmp = data;
+                $scope.screening.theater=angular.copy($scope.theaterTmp);
+            });
             if($scope.create) {
                 delete $scope.screening.id;
-                AdminService.getMovie($('#screeningMovie').val()).then(function(data) {
-                    $log.log("filmic"+data);
-                   movieTmp = data;
-                });
-                AdminService.getTheater($('#screeningTheater').val()).then(function(data) {
-                    $log.log("teatar"+data.name);
-                    theaterTmp = data;
-                });
-                $scope.screening.movie=movieTmp;
-                $scope.screening.theater=theaterTmp;
-                $log.log("filmic"+$scope.screening.movie.name);
+                $log.log("teazzeIZCSHJ"+$scope.screening.theater.name);
+                $log.log("filmizSCOPE"+$scope.screening.movie.name);
+
                 AdminService.createScreening($scope.screening);
                 $scope.screenings.push(angular.copy($scope.screening));
             } else {
