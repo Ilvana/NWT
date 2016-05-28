@@ -281,6 +281,15 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             $(angular.element(eventModal)).modal('show');
         }
 
+
+        $scope.uploadPicture = function(event) {
+            $scope.submitModal = 'Upload picture';
+            $scope.modalHeader = 'Upload picture for event';
+            $scope.create = true;
+            $scope.event = angular.copy(event);
+            $(angular.element(uploadPictureModal)).modal('show');
+        }
+
         $scope.cleanEventDialog = function() {
             $scope.resetEvent();
             $(angular.element(eventModal)).modal("hide");
@@ -298,6 +307,7 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             // Validacija
             $scope.event.timeBegin = new Date($('#timeBegin').val());
             $scope.event.timeEnd = new Date($('#timeEnd').val());
+            $scope.event.picture = $("#picture").val();
             if($scope.create) {
                 delete $scope.event.id;
                 AdminService.createEvent($scope.event);
@@ -314,6 +324,7 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             }
             $scope.cleanEventDialog();
         }
+
         var validateDates = function() {
             if($scope.event.timeBegin == 'Invalid Date') {
                 dB = $('#timeBegin').val().split(' ')[0].split('-');

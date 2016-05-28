@@ -1,18 +1,29 @@
 package kino.controller;
 
+import com.sun.deploy.net.HttpResponse;
 import kino.model.validation.EventValidator;
 import kino.utils.ErrorGenerator;
+import kino.utils.FTPClientUtil;
 import kino.utils.JsonMessageGenerator;
 import kino.model.ModelFactory;
 import kino.model.entities.Event;
 import kino.model.presentation.EventViewModel;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPConnectionClosedException;
+import org.apache.commons.net.ftp.FTPReply;
+import org.eclipse.persistence.tools.file.FileUtil;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -176,5 +187,31 @@ public class EventController {
                     ErrorGenerator.generateError("Something went wrong."), HttpStatus.NOT_FOUND
             );
         }
+    }
+
+    @RequestMapping(value = "/picture-upload", method = RequestMethod.POST)
+    public void uploadPicture(@RequestParam(value = "id",required = false) Integer id ,
+                              @RequestParam(value = "file", required = false) MultipartFile picture,
+                              HttpServletResponse response) {
+
+        String serverAddress = "";
+            if (!picture.isEmpty()) {
+                String fileName = picture.getOriginalFilename();
+                String userName = "";
+                String password = "";
+                String directoryPath="";//ovdje pretpostavljam treba postaviti path do slike na serveru or smth
+                int serverPort = 21;//21 je kao  FTP port
+                try {
+                        FTPClientUtil.uploadFile(picture.getInputStream(), fileName, directoryPath,
+                                serverAddress, serverPort,
+                                userName, password,
+                                20000, 600);
+                    } catch (IOException e) {
+                        logger.error("Failed to read file from stream, exception " + e.getMessage());
+                    }
+            } else {
+                response.setStatus(400);
+            }
+
     }
 }

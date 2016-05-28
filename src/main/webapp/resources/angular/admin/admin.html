@@ -29,6 +29,7 @@
             <th translate>admin.events.event.timeEnd</th>
             <th translate>admin.events.event.edit</th>
             <th translate>admin.events.event.delete</th>
+            <th translate>admin.events.event.upload</th>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +41,7 @@
 
             <td><button class="btn btn-warning" ng-click="editEvent(event)"><span class="glyphicon glyphicon-edit"></span></button> </td>
             <td><button class="btn btn-danger" ng-click="deleteEvent(event)"><span class="glyphicon glyphicon-remove"></span></button> </td>
+            <td><button class="btn btn-info" ng-click="uploadPicture(event)"><span class="glyphicon glyphicon-upload"></span></button> </td>
         </tr>
         </tbody>
     </table>
@@ -330,3 +332,29 @@
         </div>
     </div>
 </div>
+
+<!--Modal-->
+<div class="modal fade"
+     id="uploadPictureModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <!-- modal create new application start -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title text-uppercase">{{ modalHeader }}</h2>
+            </div>
+            <div class="modal-body"> <!-- modal body start -->
+                <form  id="uploadPictureForm" method="POST" enctype="multipart/form-data" action="/event/picture-upload">
+                    <div class="form-group">
+                        <input type="file" lass="form-control" id="picture" placeholder="Upload picture" ng-model="event.picture">
+                    </div>
+                    <button class="btn btn-info"  type="submit" form="uploadPictureForm" value="Submit">{{ submitModal }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
