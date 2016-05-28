@@ -334,10 +334,10 @@
                                   ng-model="event.description"></textarea>
                     </div>
                     <div class="form-group">
-                        <input id="timeBegin" ng-model="event.timeBegin" placeholder="Početak">
+                        <input id="timeBegin" ng-model="event.timeBegin" placeholder="Time Begin">
                     </div>
                     <div class="form-group">
-                        <input id="timeEnd" ng-model="event.timeEnd" placeholder="Kraj">
+                        <input id="timeEnd" ng-model="event.timeEnd" placeholder="Time End">
                     </div>
 
                 </form>
@@ -383,15 +383,15 @@
                         <input id="timeEndScreening" ng-model="screening.timeEnd" placeholder="Time End">
                     </div>
 
-                    <div class="form-group">
-                        <select>
-                            <option id="screeningMovie" ng-repeat="movie in movies" ng-model="screening.movie">{{movie.id}}</option>
+                    <div class="form-group" ng-model="screening.movie">
+                        <select id="screeningMovie" >
+                            <option  value="{{movie.id}}" ng-repeat="movie in movies">{{movie.id}}</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <select>
-                            <option id="screeningTheater" ng-repeat="theater in theaters" ng-model="screening.movie">{{theater.id}}</option>
+                    <div class="form-group" ng-model="screening.theater" >
+                        <select id="screeningTheater">
+                            <option value="{{theater.id}}" ng-repeat="theater in theaters">{{theater.id}}</option>
                         </select>
                     </div>
 

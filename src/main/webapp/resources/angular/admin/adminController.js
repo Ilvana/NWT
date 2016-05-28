@@ -356,10 +356,6 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
         }
 
         $scope.screenings = [];
-
-        var movieTmp='';
-        var theaterTmp='';
-
         $scope.screening = {
             'id': null,
             'timeBegin': '',
@@ -413,21 +409,19 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             $scope.screening.movie=angular.copy($scope.movieTmp);
             $scope.theaterTmp.id=$('#screeningTheater').val();
             $scope.screening.theater=angular.copy($scope.theaterTmp);
+
             AdminService.getMovie($('#screeningMovie').val()).then(function(data) {
-                $log.log("filmic"+data.name);
                 $scope.movieTmp = data;
                 $scope.screening.movie=angular.copy($scope.movieTmp);
             });
+
             AdminService.getTheater($('#screeningTheater').val()).then(function(data) {
-                $log.log("teatar"+data.name);
                 $scope.theaterTmp = data;
                 $scope.screening.theater=angular.copy($scope.theaterTmp);
             });
+
             if($scope.create) {
                 delete $scope.screening.id;
-                $log.log("teazzeIZCSHJ"+$scope.screening.theater.name);
-                $log.log("filmizSCOPE"+$scope.screening.movie.name);
-
                 AdminService.createScreening($scope.screening);
                 $scope.screenings.push(angular.copy($scope.screening));
             } else {
@@ -465,9 +459,6 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             $scope.screening.timeEnd = '';
 
         }
-
-
-
     }
 
 ]);
