@@ -225,7 +225,7 @@ app.service('AdminService', ['$http', '$q', '$log', function ($http, $q, $log) {
         var eventToSend = angular.copy(event);
 
         $http.post('/event', eventToSend).success(function () {
-            $log.log("ilvana");
+            $log.log(event);
             deferred.resolve();
         }).error(function (data, status, headers, config) {
             $log.log(data, status, headers, config);

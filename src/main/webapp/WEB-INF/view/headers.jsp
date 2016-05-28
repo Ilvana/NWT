@@ -14,7 +14,8 @@
     <link href="resources/css/animate.css" rel="stylesheet">
     <link href="resources/css/main.css" rel="stylesheet">
     <link href="resources/css/responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="resources/css/angular-chart.css" />
+    <link href="resources/css/angular-chart.css" rel="stylesheet">
+    <link href="resources/css/jquery.datetimepicker.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="resources/js/html5shiv.js"></script>
     <script src="resources/js/respond.min.js"></script>

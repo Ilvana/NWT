@@ -36,7 +36,7 @@
             <td>{{ event.name }}</td>
             <td>{{ event.description }}</td>
             <td>{{ event.timeBegin }}</td>
-            <td>{{ event.dateEnd }}</td>
+            <td>{{ event.timeEnd }}</td>
 
             <td><button class="btn btn-warning" ng-click="editEvent(event)"><span class="glyphicon glyphicon-edit"></span></button> </td>
             <td><button class="btn btn-danger" ng-click="deleteEvent(event)"><span class="glyphicon glyphicon-remove"></span></button> </td>
@@ -305,10 +305,10 @@
                                   ng-model="event.description"></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="eventTimeBegin" placeholder="Name" ng-model="event.timeBegin">
+                        <input id="timeBegin" ng-model="event.timeBegin" placeholder="Početak">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="eventTimeEnd" placeholder="Name" ng-model="event.timeEnd">
+                        <input id="timeEnd" ng-model="event.timeEnd" placeholder="Kraj">
                     </div>
                     <div class="container">
                         <div class="row">
