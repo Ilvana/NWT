@@ -25,6 +25,39 @@ app.service('ReserveTicketService', ['$http', '$q', '$log', function ($http, $q,
         return deferred.promise;
     };
 
+    this.createNewTicket = function (ticket) {
+
+        var deferred = $q.defer();
+
+        $http.post('/ticket', ticket, {  headers: { 'Content-Type': 'application/json' } }
+        ).success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
+    this.getUserLogged = function () {
+
+        var deferred = $q.defer();
+
+        var url = '/user/logged';
+
+        $http.get(url).success(function () {
+
+            deferred.resolve();
+
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
     this.getAllTickets = function () {
 
         var deferred = $q.defer();

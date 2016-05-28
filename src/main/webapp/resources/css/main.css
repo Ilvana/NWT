@@ -115,6 +115,28 @@ a#scrollUp i{
   -o-transition: all 0.9s ease 0s;
 }
 
+.loginOrRegister {
+  padding-bottom: 50px;
+}
+
+.loginOrRegister h3 {
+  width: 640px; /*can be in percentage also.*/
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  margin-left: 35%;
+  position: relative;
+}
+
+.loginOrRegister a {
+  width: 15%; /*can be in percentage also.*/
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  margin-left: 40%;
+  position: relative;
+}
+
 
 .fa-facebook:hover {
   background: #0083C9;
