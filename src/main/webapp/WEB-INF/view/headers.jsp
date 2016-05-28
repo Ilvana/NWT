@@ -13,7 +13,8 @@
     <link href="resources/css/animate.css" rel="stylesheet">
     <link href="resources/css/main.css" rel="stylesheet">
     <link href="resources/css/responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="resources/css/angular-chart.css" />
+    <link href="resources/css/angular-chart.css" rel="stylesheet">
+    <link href="resources/css/jquery.datetimepicker.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="resources/js/html5shiv.js"></script>
     <script src="resources/js/respond.min.js"></script>
@@ -29,9 +30,7 @@
     <%--Angular Chart--%>
     <script src="resources/js/chart.js"></script>
     <script src="resources/static/angular/angular-chart.js"></script>
-
     <!-- Custom angular -->
-
     <script src="resources/angular/application.js" type="text/javascript"></script>
     <script src="resources/angular/controllers.js" type="text/javascript"></script>
     <script src="resources/angular/services.js" type="text/javascript"></script>

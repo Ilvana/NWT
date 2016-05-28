@@ -13,6 +13,7 @@ public class EventViewModel {
     private String description;
     private Date timeBegin;
     private Date timeEnd;
+    private String picture;
 
     public EventViewModel() {
     }
@@ -23,6 +24,7 @@ public class EventViewModel {
         description = event.getDescription();
         timeBegin = event.getTimeBegin();
         timeEnd = event.getTimeEnd();
+        picture=event.getPicture();
     }
 
     public Integer getId() {
@@ -65,5 +67,13 @@ public class EventViewModel {
 
     public void setTimeEnd(Date timeEnd) {
         this.timeEnd = timeEnd;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

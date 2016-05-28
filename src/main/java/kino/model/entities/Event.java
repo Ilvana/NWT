@@ -22,6 +22,9 @@ public class Event implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "picture")
+    private String picture;
+
     @Column(name = "timeBegin")
     @Temporal(TemporalType.TIMESTAMP)
     private Date timeBegin;
@@ -33,11 +36,12 @@ public class Event implements Serializable {
     public Event() {
     }
 
-    public Event(String name, String description, Date timeBegin, Date timeEnd) {
+    public Event(String name, String description, Date timeBegin, Date timeEnd, String picture) {
         this.name = name;
         this.description = description;
         this.timeBegin = timeBegin;
         this.timeEnd = timeEnd;
+        this.picture=picture;
     }
 
     public Integer getId() {
@@ -80,12 +84,21 @@ public class Event implements Serializable {
         this.timeEnd = timeEnd;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", picture='" + picture + '\'' +
                 ", timeBegin=" + timeBegin +
                 ", timeEnd=" + timeEnd +
                 '}';

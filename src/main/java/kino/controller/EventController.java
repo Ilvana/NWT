@@ -122,6 +122,7 @@ public class EventController {
             event.setDescription(newEvent.getDescription());
             event.setTimeBegin(newEvent.getTimeBegin());
             event.setTimeEnd(newEvent.getTimeEnd());
+            event.setPicture(newEvent.getPicture());
 
             modelFactory.EventRepository().save(event);
 
