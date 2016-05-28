@@ -7,6 +7,7 @@
     <meta name="author" content="">
     <title>Home | Cinema</title>
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-datetimepicker.min.css">
     <%--<link href="resources/css/font-awesome.min.css" rel="stylesheet">--%>
     <link href="resources/css/prettyPhoto.css" rel="stylesheet">
     <link href="resources/css/price-range.css" rel="stylesheet">
@@ -30,8 +31,14 @@
     <script src="resources/js/chart.js"></script>
     <script src="resources/static/angular/angular-chart.js"></script>
 
-    <!-- Custom angular -->
+    <script src="resources/js/jquery.js"></script>
+    <%--datetimepicker--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Custom angular -->
     <script src="resources/angular/application.js" type="text/javascript"></script>
     <script src="resources/angular/controllers.js" type="text/javascript"></script>
     <script src="resources/angular/services.js" type="text/javascript"></script>
