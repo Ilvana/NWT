@@ -1,6 +1,5 @@
 package kino.controller;
 
-import kino.model.ScreeningsPerDate;
 import kino.model.entities.Screening;
 import kino.utils.ErrorGenerator;
 import kino.utils.JsonMessageGenerator;
@@ -15,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
