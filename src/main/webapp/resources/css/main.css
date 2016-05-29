@@ -94,6 +94,10 @@ a#scrollUp i{
   padding:0px;
 }
 
+img.displayed {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
 
 .social-icons ul li{
 	display:inline-block;
