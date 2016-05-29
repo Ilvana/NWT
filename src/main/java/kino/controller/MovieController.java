@@ -1,5 +1,7 @@
 package kino.controller;
 
+import kino.model.ScreeningsPerDate;
+import kino.model.entities.Screening;
 import kino.utils.ErrorGenerator;
 import kino.utils.JsonMessageGenerator;
 import kino.model.validation.MovieValidator;
@@ -13,10 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/movie")
@@ -48,6 +48,50 @@ public class MovieController {
         } catch (NullPointerException e) {
             logger.error("Could not create MovieViewModel. Movie is null", e);
             return new ResponseEntity(generateError("Movie not found."), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            logger.error("Unknown exception.", e);
+            return new ResponseEntity(generateError("Something unusual happened. Please try again later."), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/weekly", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getWeeklyMovies() {
+        try {
+            List<List<Movie>> moviesPerWeek = new ArrayList<>(7);
+
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.HOUR_OF_DAY, 0);
+            c.clear(Calendar.MINUTE);
+            c.clear(Calendar.SECOND);
+            c.clear(Calendar.MILLISECOND);
+
+            c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek());
+
+            Calendar calendar = Calendar.getInstance();
+
+            for(int i=1; i <= 7; i++) {
+
+                Date dateBegin = c.getTime();
+                calendar.setTime(dateBegin);
+                calendar.add(Calendar.DATE, 1);
+                Date dateEnd = calendar.getTime();
+                List<Screening> screeningsPerDay = modelFactory.ScreeningRepository().getScreeningsPerDate(dateBegin, dateEnd);
+
+                List<Movie> moviesPerDay = new ArrayList<>(screeningsPerDay.size());
+
+                for(Screening screening:screeningsPerDay) {
+                    if(!moviesPerDay.contains(screening.getMovie())) {
+                        moviesPerDay.add(screening.getMovie());
+                    }
+                }
+
+                moviesPerWeek.add(moviesPerDay);
+
+                c.add(Calendar.DATE, 1);
+            }
+
+            logger.info("Returning movies as JSON objects.");
+            return new ResponseEntity(moviesPerWeek, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Unknown exception.", e);
             return new ResponseEntity(generateError("Something unusual happened. Please try again later."), HttpStatus.NOT_FOUND);

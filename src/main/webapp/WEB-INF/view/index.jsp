@@ -15,7 +15,7 @@
 
 <jsp:include page="footer.jsp"/>
 <jsp:include page="js-scripts.jsp"/>
-
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
 <script src="resources/js/jquery.datetimepicker.full.min.js"></script>
 </body>
 </html>
