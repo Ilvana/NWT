@@ -54,6 +54,9 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider, ChartJsP
         .when('/aboutUs', {
             templateUrl: '/resources/angular/aboutUs.html'
         })
+        .when('/specialOffers', {
+            templateUrl: '/resources/angular/specialOffer.html'
+        })
         .when('/loginOrRegister', {
             templateUrl: '/resources/angular/loginOrRegister/loginOrRegister.html',
             controller: 'LoginOrRegisterController'

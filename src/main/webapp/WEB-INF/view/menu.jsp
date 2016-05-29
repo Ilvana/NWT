@@ -79,7 +79,7 @@
                         <ul style="padding-top: 8px" class="nav navbar-nav collapse navbar-collapse">
                             <li><a href="/#/" translate>menu.home.title.label</a></li>
                             <li><a href="/#/announcements" translate>menu.announcements.title.label</a></li>
-                            <li><a href="/#/special_offers" translate>menu.specialOffers.title.label</a></li>
+                            <li><a href="/#/specialOffers" translate>menu.specialOffers.title.label</a></li>
                             <li><a href="/#/aboutUs" translate>menu.aboutUs.title.label</a></li>
                             <li><a href="/#/contact" translate>menu.contact.title.label</a></li>
                         </ul>
