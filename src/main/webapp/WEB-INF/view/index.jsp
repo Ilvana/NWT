@@ -15,7 +15,6 @@
 
 <jsp:include page="footer.jsp"/>
 <jsp:include page="js-scripts.jsp"/>
-
 <script src="resources/js/jquery.datetimepicker.full.min.js"></script>
 </body>
 </html>

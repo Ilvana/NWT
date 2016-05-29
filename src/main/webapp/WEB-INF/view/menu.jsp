@@ -82,6 +82,7 @@
                             <li><a href="/#/specialOffers" translate>menu.specialOffers.title.label</a></li>
                             <li><a href="/#/aboutUs" translate>menu.aboutUs.title.label</a></li>
                             <li><a href="/#/contact" translate>menu.contact.title.label</a></li>
+                            <li><a href="/#/weekly" translate>menu.weekly.title.label</a></li>
                         </ul>
                     </div>
                 </div>

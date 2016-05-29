@@ -7,6 +7,10 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider, ChartJsP
             templateUrl: '/resources/angular/home/home.html',
             controller: 'HomeController'
         })
+        .when('/weekly', {
+            templateUrl: '/resources/angular/weekly/weekly.html',
+            controller: 'WeeklyController'
+        })
         .when('/contact', {
             templateUrl: '/resources/angular/contact/contact.html',
             controller: 'ContactController'

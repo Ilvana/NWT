@@ -63,6 +63,9 @@
     <script src="resources/angular/statistic/statisticController.js" type="text/javascript"></script>
     <script src="resources/angular/statistic/statisticService.js" type="text/javascript"></script>
 
+    <script src="resources/angular/weekly/weeklyController.js" type="text/javascript"></script>
+    <script src="resources/angular/weekly/weeklyService.js" type="text/javascript"></script>
+
     <script src="resources/angular/blog/blogController.js" type="text/javascript"></script>
     <script src="resources/angular/blog/blogService.js" type="text/javascript"></script>
 
