@@ -19,4 +19,24 @@ app.service('StatisticService', ['$http', '$q', '$log', function ($http, $q, $lo
             });
         return deferred.promise;
     }
+    this.getTickets = function() {
+        var deferred = $q.defer();
+        $http.get('/ticket/daily')
+            .success(function (data) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+        });
+        return deferred.promise;
+    }
+    this.getMonthlyTickets = function() {
+        var deferred = $q.defer();
+        $http.get('/ticket/monthly')
+            .success(function (data) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+        });
+        return deferred.promise;
+    }
 }]);
