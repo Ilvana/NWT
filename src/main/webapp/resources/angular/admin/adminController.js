@@ -106,6 +106,15 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             'genre': '',
         };
 
+        $scope.movieTmp = {
+            'id': null,
+            'name': '',
+            'duration': '',
+            'description': '',
+            'director': '',
+            'genre': '',
+        };
+
         AdminService.getMovies().then(function(data) {
             $scope.movies = data;
         });
@@ -183,6 +192,16 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             'director': '',
             'genre': '',
         };
+
+        $scope.theaterTmp = {
+            'id': null,
+            'name': '',
+            'duration': '',
+            'description': '',
+            'director': '',
+            'genre': '',
+        };
+
 
         AdminService.getTheaters().then(function(data) {
             $scope.theaters = data;
@@ -336,6 +355,110 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
 
         }
 
+        $scope.screenings = [];
+        $scope.screening = {
+            'id': null,
+            'timeBegin': '',
+            'timeEnd':'',
+            'movie':'',
+            'theater':''
+        };
+
+        $('#timeBeginScreening').datetimepicker();
+        $('#timeEndScreening').datetimepicker();
+        AdminService.getScreenings().then(function(data) {
+            $scope.screenings = data;
+        });
+         $scope.deleteScreening = function(screening) {
+            var index = $scope.screenings.indexOf(screening);
+            if (index == -1) {
+                return;
+            }
+            AdminService.deleteScreening(screening).then(function () {
+                $scope.screenings.splice(index, 1);
+            }, function () {
+                $window.location.href = '/404'
+            });
+        };
+        $scope.editScreening = function(screening) {
+            $scope.submitModal = 'Update';
+            $scope.modalHeader = 'Update screening';
+            $scope.create = false;
+            $scope.screening = angular.copy(screening);
+            $(angular.element(screeningModal)).modal('show');
+        }
+
+        $scope.cleanScreeningDialog = function() {
+            $scope.resetScreening();
+            $(angular.element(screeningModal)).modal("hide");
+            // Clean input
+        }
+
+        $scope.createScreening = function() {
+            $scope.submitModal = 'Create';
+            $scope.modalHeader = 'Create new screening';
+            $scope.create = true;
+            $(angular.element(screeningModal)).modal('show');
+        }
+
+        $scope.handleScreening = function() {
+            // Validacija
+            $scope.screening.timeBegin = new Date($('#timeBeginScreening').val());
+            $scope.screening.timeEnd = new Date($('#timeEndScreening').val());
+            $scope.movieTmp.id=$('#screeningMovie').val();
+            $scope.screening.movie=angular.copy($scope.movieTmp);
+            $scope.theaterTmp.id=$('#screeningTheater').val();
+            $scope.screening.theater=angular.copy($scope.theaterTmp);
+
+            AdminService.getMovie($('#screeningMovie').val()).then(function(data) {
+                $scope.movieTmp = data;
+                $scope.screening.movie=angular.copy($scope.movieTmp);
+            });
+
+            AdminService.getTheater($('#screeningTheater').val()).then(function(data) {
+                $scope.theaterTmp = data;
+                $scope.screening.theater=angular.copy($scope.theaterTmp);
+            });
+
+            if($scope.create) {
+                delete $scope.screening.id;
+                AdminService.createScreening($scope.screening);
+                $scope.screenings.push(angular.copy($scope.screening));
+            } else {
+                validateDatesScreening();
+                AdminService.updateScreening($scope.screening);
+                for(i=0; i < $scope.screenings.length; i++) {
+                    if($scope.screenings[i].id == $scope.screening.id) {
+                        $scope.screenings[i] = angular.copy($scope.screening);
+                        break;
+                    }
+                }
+            }
+            $scope.cleanScreeningDialog();
+        }
+
+        var validateDatesScreening = function() {
+            if($scope.screening.timeBegin == 'Invalid Date') {
+                dB = $('#timeBeginScreening').val().split(' ')[0].split('-');
+                tB = $('#timeBeginScreening').val().split(' ')[1].split(':');
+                $scope.screening.timeBegin = new Date(dB[2], dB[1], dB[0], +1, tB[0], tB[1], tB[2]);
+
+            }
+            if($scope.screening.timeEnd == 'Invalid Date') {
+                dE = $('#timeEndScreening').val().split(' ')[0].split('-');
+                tE = $('#timeEndScreening').val().split(' ')[1].split(':');
+                $scope.screening.timeEnd = new Date(dE[2], dE[1], dE[0], +1, tE[0], tE[1], tE[2]);
+            }
+        }
+
+        $scope.resetScreening = function() {
+            $scope.screening.id = null;
+            $scope.screening.movie = '';
+            $scope.screening.theater = '';
+            $scope.screening.timeBegin = '';
+            $scope.screening.timeEnd = '';
+
+        }
     }
 
 ]);
