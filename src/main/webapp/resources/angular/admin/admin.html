@@ -18,6 +18,10 @@
 <script type="text/ng-template" id="events">
     <button type="button"
             data-toggle="modal"
+            ng-click="uploadPhoto()"
+            class="btn btn-info" translate>Upload photo</button>
+    <button type="button"
+            data-toggle="modal"
             ng-click="createEvent()"
             class="pull-right btn btn-success" translate>admin.add.new.event.button</button>
     <table class="table table-hover">
@@ -310,7 +314,6 @@
                     <div class="form-group">
                         <input id="timeEnd" ng-model="event.timeEnd" placeholder="Kraj">
                     </div>
-
                 </form>
             </div>
             <!-- // modal body end -->
@@ -323,6 +326,49 @@
                         class="btn btn-success"
                         ng-click="handleEvent()"
                         aria-hidden="true">{{ submitModal }}
+                </button>
+            </div>
+            <!-- // modal footer end -->
+
+        </div>
+    </div>
+</div>
+
+
+<!--Modal-->
+<div class="modal fade"
+     id="imageModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <!-- modal create new application start -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title text-uppercase">Upload image</h2>
+            </div>
+            <div class="modal-body"> <!-- modal body start -->
+                <select ng-options="event as event.name for event in events track by event.id" ng-model="imageEvent">
+                    <option value="">-- Choose event --</option>
+                </select>
+                <form>
+                    <div class="form-group">
+                        <label for="file">Select image</label>
+                        <input type="file" id="file" ng-model="file">
+                    </div>
+                </form>
+            </div>
+            <!-- // modal body end -->
+
+            <div class="modal-footer"> <!-- modal footer start -->
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true"
+                        ng-click="cleanPhotoDialog()">Cancel
+                </button>
+                <button type="button"
+                        class="btn btn-success"
+                        ng-click="uploadEventPhoto()"
+                        aria-hidden="true">Upload
                 </button>
             </div>
             <!-- // modal footer end -->
