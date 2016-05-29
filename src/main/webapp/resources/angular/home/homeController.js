@@ -57,16 +57,20 @@ app.controller("HomeController", ['$scope','$filter', '$log', "HomeService", "$h
                     angular.forEach($scope.screenings, function(screening){
                         if(screening.movie.id == movieForInfo.id) {
                             isScheduled = true;
-                            var dateStr = screening.timeBegin.split(' ')[0].split('-');
-                            var timeStr = screening.timeBegin.split(' ')[1].split(':');
-                            var newDate =new Date(dateStr[2], parseInt(dateStr[1])-1, dateStr[0], timeStr[0], timeStr[1], timeStr[2]);
-                            
-                            var tempDate = $filter('date')(newDate, "HH:mm");
-                            if(movieForInfo.screeningList != null) {
-                                movieForInfo.screeningList = movieForInfo.screeningList + "," + tempDate;
-                            }
-                            else {
-                                movieForInfo.screeningList = tempDate;
+                            var tempDate1 = $filter('date')(new Date(), "dd-MM-yyyy");
+                            var dateStr1 = screening.timeBegin.split(' ')[0];
+                            if(tempDate1 == dateStr1) {
+                                var dateStr = screening.timeBegin.split(' ')[0].split('-');
+                                var timeStr = screening.timeBegin.split(' ')[1].split(':');
+                                var newDate = new Date(dateStr[2], parseInt(dateStr[1]) - 1, dateStr[0], timeStr[0], timeStr[1], timeStr[2]);
+
+                                var tempDate = $filter('date')(newDate, "HH:mm");
+                                if (movieForInfo.screeningList != null) {
+                                    movieForInfo.screeningList = movieForInfo.screeningList + "," + tempDate;
+                                }
+                                else {
+                                    movieForInfo.screeningList = tempDate;
+                                }
                             }
                         }
                     });

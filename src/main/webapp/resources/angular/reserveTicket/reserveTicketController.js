@@ -115,7 +115,9 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
             HomeService.getAllScreenings().then(function(scrData) {
                 var localScreenings = scrData;
                 angular.forEach(localScreenings, function(screening) {
-                    if(screening.movie.id == movieId) {
+                    var tempDate = $filter('date')(new Date(), "dd-MM-yyyy");
+                    var dateStr = screening.timeBegin.split(' ')[0];
+                    if(screening.movie.id == movieId && tempDate == dateStr) {
                         $scope.screenings.push(screening);
                         $log.log(screening.timeBegin);
                         //sorting needed here
@@ -130,9 +132,6 @@ app.controller("ReserveTicketController", ['$scope', '$routeParams', '$filter', 
                     dateStr = screening.timeEnd.split(' ')[0].split('-');
                     var timeStr = screening.timeEnd.split(' ')[1].split(':');
                     var newDateEnd =new Date(dateStr[2], parseInt(dateStr[1])-1, dateStr[0], timeStr[0], timeStr[1], timeStr[2]);
-
-                    //screening.timeBegin = $filter('date')(newDateBegin, "yyyy-MM-dd HH:mm:ss");
-                    //screening.timeEnd = $filter('date')(newDateEnd, "yyyy-MM-dd HH:mm:ss");
 
                     var tempDateBegin = $filter('date')(newDateBegin, "HH:mm");
                     var tempDateEnd = $filter('date')(newDateEnd, "HH:mm");
