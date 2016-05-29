@@ -8,6 +8,12 @@
                 <li role="presentation" ng-class="{ 'active' : templatePath == 'screeningsPerMonth' }">
                     <a ng-click="loadChart('screeningsPerMonth')" translate>stats.menu.monthly.screenings</a>
                 </li>
+                <li role="presentation" ng-class="{ 'active' : templatePath == 'ticketsPerDay' }">
+                    <a ng-click="loadChart('ticketsPerDay')" translate>stats.menu.daily.tickets</a>
+                </li>
+                <li role="presentation" ng-class="{ 'active' : templatePath == 'ticketsPerMonth' }">
+                    <a ng-click="loadChart('ticketsPerMonth')" translate>stats.menu.monthly.tickets</a>
+                </li>
             </ul>
         </div>
         <div class="col-lg-10 col-md-10 text-center">
