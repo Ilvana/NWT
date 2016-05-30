@@ -8,11 +8,11 @@ import java.util.Date;
 public class EventsPerDate {
 
     private Date date;
-    private Integer numberOfevents;
+    private Integer numberOfEvents;
 
     public EventsPerDate(Date date, Integer numberOfevents) {
         this.date = date;
-        this.numberOfevents = numberOfevents;
+        this.numberOfEvents = numberOfevents;
     }
 
     @JsonSerialize(using = CustomDateSerializer.class)
@@ -24,11 +24,11 @@ public class EventsPerDate {
         this.date = date;
     }
 
-    public Integer getNumberOfevents() {
-        return numberOfevents;
+    public Integer getNumberOfEvents() {
+        return numberOfEvents;
     }
 
-    public void setNumberOfevents(Integer numberOfevents) {
-        this.numberOfevents = numberOfevents;
+    public void setNumberOfEvents(Integer numberOfEvents) {
+        this.numberOfEvents = numberOfEvents;
     }
 }
