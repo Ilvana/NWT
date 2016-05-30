@@ -16,7 +16,7 @@
     </bean>
 
     <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-    <bean id="multipartResolver"
+    <bean id="filterMultipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="100000" />
     </bean>

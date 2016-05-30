@@ -293,25 +293,15 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window', 
             $scope.create = true;
             $(angular.element(eventModal)).modal('show');
         }
-        $scope.imageEvent = null;
         $scope.uploadPhoto = function() {
             $(angular.element(imageModal)).modal('show');
         }
         $scope.cleanPhotoDialog = function() {
             $(angular.element(eventModal)).modal('hide');
         }
-        $scope.uploadEventPhoto = function() {
-//            var formData=new FormData();
-//            formData.append("file",file.files[0]);
-//            $http.post('/event/upload/'+$scope.imageEvent.id,formData,{
-//                headers: { 'Content-Type': undefined}
-//            }).success(function(data, status) {
-//                alert("Success ... " + status);
-//            }).error(function(data, status) {
-//                alert("Error ... " + status);
-//            });
-            $http.post('/event/upload/photo/12', null).success().error();
-        }
+
+        $scope.csrfValue = $window.document.getElementsByName('_csrf')[0].content;
+        $scope.uploadPath = "/upload?_csrf="+$scope.csrfValue;
 
         $scope.handleEvent = function() {
             // Validacija
