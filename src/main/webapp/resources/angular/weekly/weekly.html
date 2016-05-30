@@ -1,0 +1,233 @@
+<div class="container">
+    <h2 class="title text-center" translate>menu.weekly.title.label</h2>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" data-target="#sunday" translate>sunday</a></li>
+        <li><a data-toggle="tab" data-target="#monday" translate>monday</a></li>
+        <li><a data-toggle="tab" data-target="#tuesday" translate>tuesday</a></li>
+        <li><a data-toggle="tab" data-target="#wednesday" translate>wednesday</a></li>
+        <li><a data-toggle="tab" data-target="#thursday" translate>thursday</a></li>
+        <li><a data-toggle="tab" data-target="#friday" translate>friday</a></li>
+        <li><a data-toggle="tab" data-target="#saturday" translate>saturday</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="monday" class="tab-pane fade">
+            <div class="row">
+                <div class="col-md-4 col-sm-4" ng-repeat="movie in movies.monday">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img ng-src='{{movie.poster}}' alt=""/>
+
+                                <h4>{{movie.name}}</h4>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+
+                                    <p>{{movie.description}}</p>
+
+                                    <a href="#/reserveTicket/{{movie.id}}" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-shopping-cart"></i>Buy Ticket
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href="{{movie.linkToImdb}}"></i>Imdb: {{movie.imdb}}</a></li>
+                                <li><a href="{{movie.linkToTomatoes}}"></i>Rotten Tomatoes: {{movie.tomatoes}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tuesday" class="tab-pane fade">
+            <div class="row">
+                <div class="col-md-4 col-sm-4" ng-repeat="movie in movies.tuesday">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img ng-src='{{movie.poster}}' alt=""/>
+
+                                <h4>{{movie.name}}</h4>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+
+                                    <p>{{movie.description}}</p>
+
+                                    <a href="#/reserveTicket/{{movie.id}}" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-shopping-cart"></i>Buy Ticket
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href="{{movie.linkToImdb}}"></i>Imdb: {{movie.imdb}}</a></li>
+                                <li><a href="{{movie.linkToTomatoes}}"></i>Rotten Tomatoes: {{movie.tomatoes}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="wednesday" class="tab-pane fade">
+            <div class="row">
+                <div class="col-md-4 col-sm-4" ng-repeat="movie in movies.wednesday">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img ng-src='{{movie.poster}}' alt=""/>
+
+                                <h4>{{movie.name}}</h4>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+
+                                    <p>{{movie.description}}</p>
+
+                                    <a href="#/reserveTicket/{{movie.id}}" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-shopping-cart"></i>Buy Ticket
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href="{{movie.linkToImdb}}"></i>Imdb: {{movie.imdb}}</a></li>
+                                <li><a href="{{movie.linkToTomatoes}}"></i>Rotten Tomatoes: {{movie.tomatoes}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="thursday" class="tab-pane fade">
+            <div class="row">
+                <div class="col-md-4 col-sm-4" ng-repeat="movie in movies.thursday">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img ng-src='{{movie.poster}}' alt=""/>
+
+                                <h4>{{movie.name}}</h4>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+
+                                    <p>{{movie.description}}</p>
+
+                                    <a href="#/reserveTicket/{{movie.id}}" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-shopping-cart"></i>Buy Ticket
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href="{{movie.linkToImdb}}"></i>Imdb: {{movie.imdb}}</a></li>
+                                <li><a href="{{movie.linkToTomatoes}}"></i>Rotten Tomatoes: {{movie.tomatoes}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="friday" class="tab-pane fade">
+            <div class="row">
+                <div class="col-md-4 col-sm-4" ng-repeat="movie in movies.friday">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img ng-src='{{movie.poster}}' alt=""/>
+
+                                <h4>{{movie.name}}</h4>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+
+                                    <p>{{movie.description}}</p>
+
+                                    <a href="#/reserveTicket/{{movie.id}}" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-shopping-cart"></i>Buy Ticket
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href="{{movie.linkToImdb}}"></i>Imdb: {{movie.imdb}}</a></li>
+                                <li><a href="{{movie.linkToTomatoes}}"></i>Rotten Tomatoes: {{movie.tomatoes}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="saturday" class="tab-pane fade">
+            <div class="row">
+                <div class="col-md-4 col-sm-4" ng-repeat="movie in movies.saturday">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img ng-src='{{movie.poster}}' alt=""/>
+
+                                <h4>{{movie.name}}</h4>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+
+                                    <p>{{movie.description}}</p>
+
+                                    <a href="#/reserveTicket/{{movie.id}}" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-shopping-cart"></i>Buy Ticket
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href="{{movie.linkToImdb}}"></i>Imdb: {{movie.imdb}}</a></li>
+                                <li><a href="{{movie.linkToTomatoes}}"></i>Rotten Tomatoes: {{movie.tomatoes}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sunday" class="tab-pane fade in active">
+            <div class="row">
+                <div class="col-md-4 col-sm-4" ng-repeat="movie in movies.sunday">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img ng-src='{{movie.poster}}' alt=""/>
+
+                                <h4>{{movie.name}}</h4>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+
+                                    <p>{{movie.description}}</p>
+
+                                    <a href="#/reserveTicket/{{movie.id}}" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-shopping-cart"></i>Buy Ticket
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href="{{movie.linkToImdb}}"></i>Imdb: {{movie.imdb}}</a></li>
+                                <li><a href="{{movie.linkToTomatoes}}"></i>Rotten Tomatoes: {{movie.tomatoes}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

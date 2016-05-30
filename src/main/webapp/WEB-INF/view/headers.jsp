@@ -30,9 +30,7 @@
     <%--Angular Chart--%>
     <script src="resources/js/chart.js"></script>
     <script src="resources/static/angular/angular-chart.js"></script>
-
     <!-- Custom angular -->
-
     <script src="resources/angular/application.js" type="text/javascript"></script>
     <script src="resources/angular/controllers.js" type="text/javascript"></script>
     <script src="resources/angular/services.js" type="text/javascript"></script>
@@ -52,6 +50,8 @@
     <script src="resources/angular/reserveTicket/reserveTicketService.js" type="text/javascript"></script>
     <script src="resources/angular/reserveTicket/reserveTicketController.js" type="text/javascript"></script>
 
+    <script src="resources/angular/loginOrRegister/loginOrRegisterController.js" type="text/javascript"></script>
+
     <script src="resources/angular/login/loginController.js" type="text/javascript"></script>
     <script src="resources/angular/reset/resetController.js" type="text/javascript"></script>
     <script src="resources/angular/newPassword/newPasswordController.js" type="text/javascript"></script>
@@ -62,6 +62,9 @@
 
     <script src="resources/angular/statistic/statisticController.js" type="text/javascript"></script>
     <script src="resources/angular/statistic/statisticService.js" type="text/javascript"></script>
+
+    <script src="resources/angular/weekly/weeklyController.js" type="text/javascript"></script>
+    <script src="resources/angular/weekly/weeklyService.js" type="text/javascript"></script>
 
     <script src="resources/angular/blog/blogController.js" type="text/javascript"></script>
     <script src="resources/angular/blog/blogService.js" type="text/javascript"></script>

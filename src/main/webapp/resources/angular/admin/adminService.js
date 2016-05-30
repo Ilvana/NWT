@@ -250,4 +250,58 @@ app.service('AdminService', ['$http', '$q', '$log', function ($http, $q, $log) {
         return deferred.promise;
     };
 
+    this.getScreenings = function () {
+        var deferred = $q.defer();
+        $http.get('/screening')
+            .success(function (data) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                $log.log(data, status, headers, config);
+            });
+        return deferred.promise;
+    };
+
+    this.deleteScreening = function (item) {
+        var deferred = $q.defer();
+        $http.delete('/screening/' + item.id).success(function (data) {
+            deferred.resolve();
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+        });
+        return deferred.promise;
+    };
+
+    this.createScreening = function (screening) {
+
+        var deferred = $q.defer();
+
+        var screeningToSend = angular.copy(screening);
+
+        $http.post('/screening', screeningToSend).success(function () {
+            $log.log(screening);
+            deferred.resolve();
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+    this.updateScreening = function (screening) {
+
+        var deferred = $q.defer();
+
+        var screeningToSend = angular.copy(screening);
+
+        $http.put('/screening/'+screeningToSend.id, screeningToSend).success(function () {
+            deferred.resolve();
+        }).error(function (data, status, headers, config) {
+            $log.log(data, status, headers, config);
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
+
 }]);

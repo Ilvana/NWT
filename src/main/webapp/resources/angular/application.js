@@ -7,6 +7,10 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider, ChartJsP
             templateUrl: '/resources/angular/home/home.html',
             controller: 'HomeController'
         })
+        .when('/weekly', {
+            templateUrl: '/resources/angular/weekly/weekly.html',
+            controller: 'WeeklyController'
+        })
         .when('/contact', {
             templateUrl: '/resources/angular/contact/contact.html',
             controller: 'ContactController'
@@ -50,6 +54,16 @@ app.config(function ($translateProvider, $routeProvider, $httpProvider, ChartJsP
         .when('/admin', {
             templateUrl: '/resources/angular/admin/admin.html',
             controller: 'AdminController'
+        })
+        .when('/aboutUs', {
+            templateUrl: '/resources/angular/aboutUs.html'
+        })
+        .when('/specialOffers', {
+            templateUrl: '/resources/angular/specialOffer.html'
+        })
+        .when('/loginOrRegister', {
+            templateUrl: '/resources/angular/loginOrRegister/loginOrRegister.html',
+            controller: 'LoginOrRegisterController'
         });
 
     $httpProvider.defaults.headers.common = {Accept: "application/json"};

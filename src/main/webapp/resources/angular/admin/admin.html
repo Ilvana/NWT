@@ -6,6 +6,7 @@
             <li role="presentation" ng-class="{ 'active' : templatePath == 'movies' }"><a ng-click="loadTemplate('movies')" translate>admin.menu.movies</a></li>
             <li role="presentation" ng-class="{ 'active' : templatePath == 'theaters' }"><a ng-click="loadTemplate('theaters')" translate>admin.menu.theaters</a></li>
             <li role="presentation" ng-class="{ 'active' : templatePath == 'events' }"><a ng-click="loadTemplate('events')" translate>admin.menu.events</a></li>
+            <li role="presentation" ng-class="{ 'active' : templatePath == 'screenings' }"><a ng-click="loadTemplate('screenings')" translate>admin.menu.screenings</a></li>
 
         </ul>
     </div>
@@ -14,6 +15,34 @@
     </div>
 </div>
 </div>
+
+<script type="text/ng-template" id="screenings">
+    <button type="button"
+            data-toggle="modal"
+            ng-click="createScreening()"
+            class="pull-right btn btn-success" translate>admin.add.new.screenings.button</button>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th translate>admin.screenings.screening.timeBegin</th>
+            <th translate>admin.screenings.screening.timeEnd</th>
+            <th translate>admin.screenings.screening.movie</th>
+            <th translate>admin.screenings.screening.theatre</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="screening in screenings">
+            <td>{{ screening.timeBegin }}</td>
+            <td>{{ screening.timeEnd }}</td>
+            <td>{{ screening.movie.name }}</td>
+            <td>{{ screening.theater.name }}</td>
+
+            <td><button class="btn btn-warning" ng-click="editScreening(screening)"><span class="glyphicon glyphicon-edit"></span></button> </td>
+            <td><button class="btn btn-danger" ng-click="deleteScreening(screening)"><span class="glyphicon glyphicon-remove"></span></button> </td>
+        </tr>
+        </tbody>
+    </table>
+</script>
 
 <script type="text/ng-template" id="events">
     <button type="button"
@@ -309,10 +338,10 @@
                                   ng-model="event.description"></textarea>
                     </div>
                     <div class="form-group">
-                        <input id="timeBegin" ng-model="event.timeBegin" placeholder="Početak">
+                        <input id="timeBegin" ng-model="event.timeBegin" placeholder="Time Begin">
                     </div>
                     <div class="form-group">
-                        <input id="timeEnd" ng-model="event.timeEnd" placeholder="Kraj">
+                        <input id="timeEnd" ng-model="event.timeEnd" placeholder="Time End">
                     </div>
                 </form>
             </div>
@@ -334,7 +363,6 @@
     </div>
 </div>
 
-
 <!--Modal-->
 <div class="modal fade"
      id="imageModal"
@@ -346,7 +374,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title text-uppercase">Upload image</h2>
+            <h2 class="modal-title text-uppercase">Upload image</h2>
             </div>
             <div class="modal-body"> <!-- modal body start -->
                 <form method="POST" action="{{ uploadPath }}" enctype="multipart/form-data">
@@ -366,11 +394,64 @@
                         </button>
                         <input type="submit" class="btn btn-success" value="Upload"/>
                     </div>
+                    </form>
+                </div>
+            <div class="modal-footer" />
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+<div class="modal fade"
+     id="screeningModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <!-- modal create new application start -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title text-uppercase">{{ modalHeader }}</h2>
+            </div>
+            <div class="modal-body"> <!-- modal body start -->
+                <form>
+
+                    <div class="form-group">
+                        <input id="timeBeginScreening" ng-model="screening.timeBegin" placeholder="Time Begin">
+                    </div>
+                    <div class="form-group">
+                        <input id="timeEndScreening" ng-model="screening.timeEnd" placeholder="Time End">
+                    </div>
+
+                    <div class="form-group" ng-model="screening.movie">
+                        <select id="screeningMovie" >
+                            <option  value="{{movie.id}}" ng-repeat="movie in movies">{{movie.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" ng-model="screening.theater" >
+                        <select id="screeningTheater">
+                            <option value="{{theater.id}}" ng-repeat="theater in theaters">{{theater.name}}</option>
+                        </select>
+                    </div>
+
                 </form>
             </div>
             <!-- // modal body end -->
 
-            <div class="modal-footer" />
+            <div class="modal-footer"> <!-- modal footer start -->
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true"
+                        ng-click="cleanScreeningDialog()">Cancel
+                </button>
+                <button type="button"
+                        class="btn btn-success"
+                        ng-click="handleScreening()"
+                        aria-hidden="true">{{ submitModal }}
+                </button>
+            </div>
+            <!-- // modal footer end -->
+
         </div>
     </div>
 </div>

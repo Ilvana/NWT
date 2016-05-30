@@ -1,5 +1,6 @@
 package kino.controller;
 
+import kino.model.EventsPerDate;
 import kino.model.validation.EventValidator;
 import kino.utils.ErrorGenerator;
 import kino.utils.JsonMessageGenerator;
@@ -12,13 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 
 @RestController
 @RequestMapping("/event")
@@ -34,6 +34,86 @@ public class EventController {
         return new ResponseEntity(
                 ErrorGenerator.generateError(String.format("Error ocurred: %s", exception.getMessage())), HttpStatus.BAD_REQUEST
         );
+    }
+
+    @RequestMapping(value = "/daily", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getEventsDaily() {
+
+        try {
+            List<EventsPerDate> eventsPerDays = new ArrayList<>(7);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(sdf.parse(sdf.format(new Date())));
+
+            Calendar calendar = Calendar.getInstance();
+            for (int i = 1; i <= 7; i++) {
+
+                Date dateBegin = c.getTime();
+                calendar.setTime(dateBegin);
+                calendar.add(Calendar.DATE, 1);
+                Date dateEnd = calendar.getTime();
+                Integer numberOfEvents = modelFactory.EventRepository().getEventsNumberPerDate(dateBegin, dateEnd);
+
+                EventsPerDate eventsPerDate = new EventsPerDate(dateBegin, numberOfEvents);
+
+                eventsPerDays.add(eventsPerDate);
+
+                c.add(Calendar.DATE, 1);
+            }
+
+            return new ResponseEntity(eventsPerDays, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Failed to fetch events per day.", e);
+            return new ResponseEntity(
+                    ErrorGenerator.generateError("Something unusual happened. Please try again later."), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/monthly", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getEventsPerMonth() {
+        try {
+            List<EventsPerDate> eventsPerMonths = new ArrayList<>(5);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar c = GregorianCalendar.getInstance();
+            c.setTime(new Date());
+            c.set(Calendar.DAY_OF_MONTH,
+                    c.getActualMinimum(Calendar.DAY_OF_MONTH));
+            c.set(Calendar.MONTH, Calendar.MONTH - 1);
+            c.set(Calendar.HOUR_OF_DAY, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MILLISECOND, 0);
+
+            Calendar calendar = Calendar.getInstance();
+
+            for (int i = 1; i <= 5; i++) {
+
+                Date dateBegin = c.getTime();
+
+                calendar.setTime(dateBegin);
+                calendar.add(Calendar.MONTH, 1);
+                Date dateEnd = calendar.getTime();
+                Integer numberOfEvents = modelFactory.EventRepository().getEventsNumberPerDate(dateBegin, dateEnd);
+
+                EventsPerDate eventsPerDay = new EventsPerDate(dateBegin, numberOfEvents);
+
+                eventsPerMonths.add(eventsPerDay);
+
+                c.add(Calendar.MONTH, 1);
+            }
+
+            return new ResponseEntity(eventsPerMonths, HttpStatus.OK);
+
+        } catch (Exception e) {
+            logger.error("Failed to fetch events per month.", e);
+            return new ResponseEntity(
+                    ErrorGenerator.generateError("Something unusual happened. Please try again later."), HttpStatus.NOT_FOUND
+            );
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET)

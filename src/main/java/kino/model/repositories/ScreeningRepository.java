@@ -14,4 +14,6 @@ public interface ScreeningRepository extends JpaRepository<Screening, Integer>{
     List<Screening> findByTheater(Theater theater);
     @Query("SELECT COUNT(s) FROM Screening s WHERE s.timeBegin BETWEEN ?1 AND ?2")
     public Integer getScreeningsNumberPerDate(Date dateBegin, Date dateEnd);
+    @Query("SELECT s FROM Screening s WHERE s.timeBegin BETWEEN ?1 AND ?2")
+    public List<Screening> getScreeningsPerDate(Date dateBegin, Date dateEnd);
 }
