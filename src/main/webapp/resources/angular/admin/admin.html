@@ -47,6 +47,10 @@
 <script type="text/ng-template" id="events">
     <button type="button"
             data-toggle="modal"
+            ng-click="uploadPhoto()"
+            class="btn btn-info" translate>Upload photo</button>
+    <button type="button"
+            data-toggle="modal"
             ng-click="createEvent()"
             class="pull-right btn btn-success" translate>admin.add.new.event.button</button>
     <table class="table table-hover">
@@ -339,7 +343,6 @@
                     <div class="form-group">
                         <input id="timeEnd" ng-model="event.timeEnd" placeholder="Time End">
                     </div>
-
                 </form>
             </div>
             <!-- // modal body end -->
@@ -356,6 +359,44 @@
             </div>
             <!-- // modal footer end -->
 
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+<div class="modal fade"
+     id="imageModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <!-- modal create new application start -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h2 class="modal-title text-uppercase">Upload image</h2>
+            </div>
+            <div class="modal-body"> <!-- modal body start -->
+                <form method="POST" action="{{ uploadPath }}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <select name="event" ng-options="event as event.name for event in events track by event.id" ng-model="imageEvent">
+                            <option value="">-- Choose event --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="file">Choose image</label>
+                        <input type="file" name="file" id="file">
+                    </div>
+                    <input type="hidden" name="_csrf" value="{{ csrfValue }}">
+                    <div class="form-group pull-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true"
+                                ng-click="cleanPhotoDialog()">Cancel
+                        </button>
+                        <input type="submit" class="btn btn-success" value="Upload"/>
+                    </div>
+                    </form>
+                </div>
+            <div class="modal-footer" />
         </div>
     </div>
 </div>

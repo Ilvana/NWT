@@ -1,24 +1,34 @@
 package kino.controller;
 
 import kino.configuration.BeanConfiguration;
+import kino.model.ModelFactory;
 import kino.model.entities.Contact;
+import kino.model.entities.Event;
 import kino.service.MailService;
 import kino.utils.ErrorGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
 public class MainController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
     @RequestMapping(value = "/welcome" , method = RequestMethod.GET)
     public String welcomePage(Model model) {
@@ -39,6 +49,52 @@ public class MainController {
         String userName = principal.getName();
         model.addAttribute("message", "Welcome " + userName);
         return "index";
+    }
+
+    @RequestMapping(value="/upload", method = RequestMethod.POST)
+    public void UploadFile(@RequestParam("event") Integer eventId,
+                           @RequestParam("file") MultipartFile file,
+                           HttpServletResponse response) {
+
+        String name = file.getOriginalFilename();
+        if(name.contains("/")) {
+            try {
+                response.sendRedirect("/404");
+            } catch (IOException e) {
+                LOGGER.error(e.getMessage());
+            }
+        }
+        if(name.contains("/")) {
+            try {
+                response.sendRedirect("/404");
+            } catch (IOException e) {
+                LOGGER.error(e.getMessage());
+            }
+        }
+        if(!file.isEmpty()) {
+            try {
+                String path = getClass().getClassLoader().getResource("log4j.xml").getPath();
+                path = path.substring(0, path.indexOf("/WEB-INF"));
+                path = path.concat("/resources/upload/");
+                File newFile = new File(path + name);
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(newFile)
+                );
+                FileCopyUtils.copy(file.getInputStream(), stream);
+                Event event = ModelFactory.getInstance().EventRepository().findOne(eventId);
+                event.setPicture("/resources/upload/"+name);
+                ModelFactory.getInstance().EventRepository().saveAndFlush(event);
+                stream.close();
+            }
+            catch (Exception e) {
+                LOGGER.error(e.getMessage());
+            }
+        }
+        try {
+            response.sendRedirect("/#/admin");
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/contactUs",method = RequestMethod.POST)
