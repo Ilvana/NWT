@@ -88,7 +88,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
-                        <input type="text" placeholder="{{ 'main.nav.search' | translate }}"/>
+                        <input type="text" placeholder="Search"/>
                     </div>
                 </div>
             </div>
