@@ -22,9 +22,12 @@
     <script src="https://use.fontawesome.com/ad58ca6dfc.js"></script>
 
     <!-- AngularJS -->
-    <script src='resources/static/angular/angular.js'></script>
+    <%--<script src='resources/static/angular/angular.js'></script>--%>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src='resources/static/angular/ui-bootstrap.min.js'></script>
     <script src='resources/static/angular/angular-route.js'></script>
     <script src='resources/static/angular/angular-cookies.js'></script>
+
     <script type="text/javascript" src="resources/static/angular/angular-translate.min.js"></script>
     <script type="text/javascript" src="resources/static/angular/angular-translate-loader-url.min.js"></script>
     <%--Angular Chart--%>

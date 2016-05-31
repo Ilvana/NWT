@@ -1,4 +1,5 @@
-var app = angular.module('Application', ['pascalprecht.translate','ngRoute', 'ngCookies', 'controllers', 'services', 'chart.js']);
+var app = angular.module('Application', ['pascalprecht.translate','ngRoute',
+'ngCookies', 'controllers', 'services', 'chart.js', 'ui.bootstrap']);
 
 app.config(function ($translateProvider, $routeProvider, $httpProvider, ChartJsProvider) {
 

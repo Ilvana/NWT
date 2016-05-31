@@ -233,15 +233,15 @@ public class UserController {
     }
 
     @RequestMapping( value = "/login", method = RequestMethod.POST)
-    public ResponseEntity checkLogin(@RequestBody User userCredentials) {
+    public void checkLogin(@RequestBody User userCredentials, HttpServletResponse response) {
 
         List<User> users = modelFactory
                                 .UserRepository()
                                 .findByUsername(userCredentials.getUsername());
 
-        HttpStatus httpStatus = isValidUser(userCredentials, users) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+        Integer httpStatus = isValidUser(userCredentials, users) ? 200 : 404;
 
-        return new ResponseEntity("Check user login.", httpStatus);
+        response.setStatus(httpStatus);
     }
 
     private boolean isValidUser(User userCredentials, List<User> users) {
