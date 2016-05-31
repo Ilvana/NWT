@@ -1,5 +1,5 @@
-app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
-    function ($scope, $log, AdminService, $window) {
+app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window', '$http',
+    function ($scope, $log, AdminService, $window, $http) {
         $scope.templatePath = 'users';
 
         $scope.modalHeader = '';
@@ -312,6 +312,15 @@ app.controller("AdminController", ['$scope', '$log', 'AdminService', '$window',
             $scope.create = true;
             $(angular.element(eventModal)).modal('show');
         }
+        $scope.uploadPhoto = function() {
+            $(angular.element(imageModal)).modal('show');
+        }
+        $scope.cleanPhotoDialog = function() {
+            $(angular.element(eventModal)).modal('hide');
+        }
+
+        $scope.csrfValue = $window.document.getElementsByName('_csrf')[0].content;
+        $scope.uploadPath = "/upload?_csrf="+$scope.csrfValue;
 
         $scope.handleEvent = function() {
             // Validacija
