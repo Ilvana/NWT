@@ -19,14 +19,13 @@ app.controller("LoginController", ['$scope', '$routeParams', '$log', '$window', 
                 return;
             }
 
-            $http.post('/user/login', user, {  headers: { 'Content-Type': 'application/json' } }
-                ).success(function () {
-                    angular.element(loginForm)[0].submit();
-                }).error(function (data, status, headers, config) {
-                    $log.log(data, status, headers, config);
-                    $scope.error = true;
-                    return;
-                });
+            $http.post('/user/login', user).success(function (data) {
+                angular.element(loginForm)[0].submit();
+            }).error(function (data, status, headers, config) {
+                $log.log(data, status, headers, config);
+                $scope.error = true;
+                return;
+            });
         }
 
         $scope.forgotPassword = function(){
