@@ -38,8 +38,11 @@
             </button>
             <br>
         </div>
-        <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></pagination>
+
     </div>
+    <br/><br/>
+    <hr />
+    <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination" items-per-page="itemsPerPage"></uib-pagination>
 </script>
 
 <script type="text/ng-template" id="announcement">

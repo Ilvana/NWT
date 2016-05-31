@@ -2,7 +2,7 @@ app.controller("AnnouncementsController", ['$scope','$filter', '$log', "Announce
     function ($scope, $filter, $log, AnnouncementsService) {
 
         $scope.announcementTemplate = 'announcements';
-//        $scope.events = [];
+        $scope.events = [];
         $scope.oneEvent = {
             'id': null,
             'name': '',
@@ -10,42 +10,15 @@ app.controller("AnnouncementsController", ['$scope','$filter', '$log', "Announce
             'timeBegin': '',
             'timeEnd': ''
         };
-        $scope.events = [
-            {'id': null,
-             'name': '',
-             'description': '',
-             'timeBegin': '',
-             'timeEnd': ''},
-            {'id': null,
-             'name': '',
-             'description': '',
-             'timeBegin': '',
-             'timeEnd': ''},
-            {'id': null,
-             'name': '',
-             'description': '',
-             'timeBegin': '',
-             'timeEnd': ''},
-            {'id': null,
-             'name': '',
-             'description': '',
-             'timeBegin': '',
-             'timeEnd': ''},
-            {'id': null,
-             'name': '',
-             'description': '',
-             'timeBegin': '',
-             'timeEnd': ''}
-        ];
-        $scope.totalItems = 5;
-//        AnnouncementsService.getAllEvents().then(function (data) {
-//            $scope.events = data;
-//            $scope.totalItems = $scope.events.length;
-//            angular.forEach($scope.events, function(event) {
-//                event.date = event.timeBegin.split(' ')[0];
-//                event.time = event.timeBegin.split(' ')[1];
-//            });
-//        });
+        $scope.totalItems = 1;
+        AnnouncementsService.getAllEvents().then(function (data) {
+            $scope.events = data;
+            $scope.totalItems = $scope.events.length;
+            angular.forEach($scope.events, function(event) {
+                event.date = event.timeBegin.split(' ')[0];
+                event.time = event.timeBegin.split(' ')[1];
+            });
+        });
 
         $scope.showDetails = function(event) {
 
@@ -53,7 +26,7 @@ app.controller("AnnouncementsController", ['$scope','$filter', '$log', "Announce
             $scope.announcementTemplate = 'announcement';
         }
         $scope.currentPage = 1;
-        $scope.itemsPerPage = 2;
+        $scope.itemsPerPage = 1;
         $scope.maxSize = 3; //Number of pager buttons to show
 
         $scope.setPage = function (pageNo) {
